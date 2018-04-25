@@ -236,3 +236,43 @@
     </footer>
   </section>
 {%- endmacro %}
+
+{#
+  entrypoint: used to tag a given "page type" and remains the same across all
+    pages of the class, e.g., no matter URL of the firstrun page, entrypoint is
+    always `firstrun`. must validate against [\w.:-]+
+    REQUIRED
+  class_name: applies a class to the form. default: 'fxa-email-form'
+  id: applies an id to the <form>. default: fxa-email-form
+  label_text: text of the label for the email field. default: 'Email address'
+  submit_text: text of the submit button. default: 'Submit'
+  utm_params: dictionary of utm_* params to include. 'utm_' will automatically
+    be prepended to all keys. example:
+
+    {
+      'content': 'accounts-page',
+      'medium': 'referral',
+      'campaign': 'accounts-page',
+      'source': 'accounts-page',
+      'term': 'someterm',
+    }
+
+    all values must validate against /^[\w\/.%-]+/
+#}
+{% macro fxa_email_form(entrypoint, class_name='fxa-email-form', id='fxa-email-form', label_text='Email address', submit_text='Submit', utm_params={}) -%}
+<form action="https://accounts.firefox.com/" id="{{ id }}" class="{{ class_name }}">
+  <input type="hidden" name="action" value="email" />
+  <input type="hidden" name="context" value="fx_desktop_v3" />
+  <input type="hidden" name="service" value="sync" />
+  <input type="hidden" name="entrypoint" value="{{ entrypoint }}" />
+
+  {% for attr, val in utm_params.items() %}
+    <input type="hidden" name="utm_{{ attr }}" value="{{ val }}" />
+  {% endfor %}
+
+  <label for="fxa-email-field">{{ label_text }}</label>
+  <input type="email" name="email" id="fxa-email-field" class="fxa-email-field" required />
+
+  <button type="submit" class="button button-blue">{{ submit_text }}</button>
+</form>
+{%- endmacro %}

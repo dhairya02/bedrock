@@ -313,6 +313,12 @@ PIPELINE_CSS = {
         ),
         'output_filename': 'css/firefox_firstrun_quantum-bundle.css',
     },
+    'firefox_firstrun_iframeless_fxa': {
+        'source_filenames': (
+            'css/firefox/firstrun/firstrun-iframeless-fxa.scss',
+        ),
+        'output_filename': 'css/firefox_firstrun_iframeless_fxa-bundle.css',
+    },
     'firefox_firstrun_facebook_container': {
         'source_filenames': (
             'css/firefox/firstrun/firstrun-facebook-container.scss',
@@ -1021,6 +1027,13 @@ PIPELINE_JS = {
             'js/firefox/firstrun/firstrun_quantum.js',
         ),
         'output_filename': 'js/firefox_firstrun_quantum-bundle.js',
+    },
+    'firefox_firstrun_iframeless_fxa': {
+        'source_filenames': (
+            'js/base/uitour-lib.js',
+            'js/firefox/firstrun/firstrun_iframeless_fxa.js',
+        ),
+        'output_filename': 'js/firefox_firstrun_iframeless_fxa-bundle.js',
     },
     'experiment_firstrun_copy': {
         'source_filenames': (

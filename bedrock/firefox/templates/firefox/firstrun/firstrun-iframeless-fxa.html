@@ -1,0 +1,71 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
+
+{% from "macros.html" import fxa_email_form with context %}
+
+{% add_lang_files "firefox/new/quantum" %}
+
+{% extends "firefox/firstrun/base-pebbles.html" %}
+
+{% block experiments %}
+  {% if switch('firstrun-copy-experiment', ['en-US']) %}
+    {% javascript 'experiment_firstrun_copy' %}
+  {% endif %}
+{% endblock %}
+
+{% block body_id %}firstrun-quantum-onboarding{% endblock %}
+
+{% block page_title %}
+  {{ _('Welcome to Firefox') }}
+{% endblock %}
+
+{% block site_css %}
+  {% stylesheet 'firefox_firstrun_iframeless_fxa' %}
+{% endblock %}
+
+{% block global_nav %}{% endblock %}
+{% block site_header %}{% endblock %}
+
+{% block content %}
+  <div id="scene">
+    <main class="fxaccounts-container">
+      <header id="main-header">
+      {% block main_copy %}
+        <h1>
+        {% if l10n_has_tag('firstrun_email_only_form') %}
+          {{ _('Take Firefox with You') }}
+        {% else %}
+          {{_('Already using Firefox?')}}
+        {% endif %}
+        </h1>
+        <p class="content">
+        {% if l10n_has_tag('firstrun_email_only_form') %}
+          {{ _('Get your bookmarks, history, passwords and other settings on all your devices.') }}
+        {% else %}
+          {{_('Sign in to your account and we’ll sync the bookmarks, passwords and other great things you’ve saved to Firefox on other devices.')}}
+        {% endif %}
+        </p>
+      {% endblock %}
+        <a href="{{ url('firefox.features.sync') }}" rel="noopener noreferrer" target="_blank">{{_('Learn more about Firefox Accounts')}}</a>
+      </header>
+      <div id="fxaccounts-wrapper">
+        <div id="fxa-form-wrapper">
+          {{ fxa_email_form(entrypoint='firstrun', utm_params={'content': 'test_content', 'medium': 'test_medium', 'source': 'test_source', 'term': 'test_term'}) }}
+          <button id="skip-button">{{_('Skip this step')}}</button>
+        </div>
+      </div>
+    </main>
+
+  </div>{# /#scene #}
+{% endblock %}
+
+{% block site_footer %}{% endblock %}
+
+{# update-notification does not play well with current firstrun animated background and layout #}
+{% block extrahead %}{% endblock %}
+{% block update_notification %}{% endblock %}
+
+{% block js %}
+  {% javascript 'firefox_firstrun_iframeless_fxa' %}
+{% endblock %}

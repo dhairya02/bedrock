@@ -409,6 +409,8 @@ class FirstrunView(l10n_utils.LangFilesMixin, TemplateView):
             else:
                 template = 'firefox/dev-firstrun.html'
         elif show_57_firstrun(version):
+            template = 'firefox/firstrun/firstrun-iframeless-fxa.html'
+            """
             if (switch('firefox-facebook-container-funnelcake') and locale == 'en-US' and experience == 'facebook-container'):
                 template = 'firefox/firstrun/facebook-container.html'
             else:
@@ -416,6 +418,7 @@ class FirstrunView(l10n_utils.LangFilesMixin, TemplateView):
                     template = 'firefox/firstrun/firstrun-quantum-{}.html'.format(variation)
                 else:
                     template = 'firefox/firstrun/firstrun-quantum.html'
+            """
         else:
             template = 'firefox/firstrun/index.html'
 
