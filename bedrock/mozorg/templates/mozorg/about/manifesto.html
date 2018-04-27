@@ -44,7 +44,7 @@
 {% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'manifesto' %}
+  <link href="{{ static('css/mozorg/manifesto.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header_logo %}{% endblock %}
@@ -399,7 +399,9 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'manifesto' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/mozilla-share-cta.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/mozorg/manifesto.js') }}" charset="utf-8"></script>
 {% endblock %}
 
   {#- End the redesigned landing page -#}

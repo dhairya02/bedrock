@@ -6,7 +6,7 @@
 {% extends "base-resp.html" %}
 
 {% block page_css %}
-  {% stylesheet 'privacy' %}
+  <link href="{{ static('css/privacy/privacy.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_class %}sand{% endblock %}
@@ -46,5 +46,5 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'privacy' %}
+  <script type="text/javascript" src="{{ static('js/privacy/privacy.js') }}" charset="utf-8"></script>
 {% endblock %}

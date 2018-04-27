@@ -11,12 +11,15 @@
 {% block body_class %}sand{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'annual_2011' %}
+  <link href="{{ static('css/foundation/annual2011.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" media="print" href="{{ static('css/foundation/annual2011print.css') }}">
 {% endblock %}
 
 {% block js %}
-  {% javascript 'annual_2011' %}
+  <script type="text/javascript" src="{{ static('js/libs/jquery.hoverIntent.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.jcarousel.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/foundation/annual2011.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 

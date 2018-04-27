@@ -11,7 +11,7 @@
 {% block page_desc %}{{_('Millions of people around the world trust Firefox Web browsers on Android, iOS and desktop computers. Fast. Private. Download now!')}}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_facebook_container' %}
+  <link href="{{ static('css/firefox/facebook-container.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_id %}firefox{% endblock %}
@@ -144,9 +144,10 @@
 {% block update_notification %}{% endblock %}
 
 {% block js %}
-  {% javascript 'firefox_facebook_container_video' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-video-poster.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/facebook-container-video.js') }}" charset="utf-8"></script>
 
   {% if switch('firefox-facebook-container-funnelcake', ['en-US']) %}
-    {% javascript 'firefox_facebook_container_funnelcake' %}
+    <script type="text/javascript" src="{{ static('js/firefox/facebook-container-funnelcake.js') }}" charset="utf-8"></script>
   {% endif %}
 {% endblock %}

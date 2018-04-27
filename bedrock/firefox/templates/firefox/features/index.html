@@ -11,7 +11,7 @@
 
 {% block page_css %}
   {{ super() }}
-  {% stylesheet 'firefox-features-index' %}
+  <link href="{{ static('css/firefox/features/index.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_id %}firefox-features-landing{% endblock %}

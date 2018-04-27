@@ -81,6 +81,8 @@
 
 {% block js %}
   <!--[if !lte IE 8]><!-->
-    {% javascript 'smarton-landing' %}
+    <script type="text/javascript" src="{{ static('js/base/mozilla-share-cta.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/libs/snap.svg.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/teach/smarton-landing.js') }}" charset="utf-8"></script>
   <!--<![endif]-->
 {% endblock %}

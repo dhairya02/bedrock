@@ -14,7 +14,8 @@
 {% block canonical_urls %}<meta name="robots" content="noindex,follow">{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'etc-firefox-retention-thank-you-referral' %}
+  <link href="{{ static('css/etc/firefox/retention/thank-you.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/etc/firefox/retention/thank-you-referral.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header %}{% endblock %}
@@ -68,7 +69,7 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'etc-firefox-retention-thank-you' %}
+  <script type="text/javascript" src="{{ static('js/etc/firefox/retention/confetti.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 {% block body_id %}thank-you{% endblock %}

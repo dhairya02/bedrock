@@ -12,7 +12,8 @@
 {% block page_og_title %}{{ self.page_title() }}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_channel' %}
+  <link href="{{ static('css/newsletter/fxnewsletter-subscribe.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/channel.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_class %}{% endblock %}

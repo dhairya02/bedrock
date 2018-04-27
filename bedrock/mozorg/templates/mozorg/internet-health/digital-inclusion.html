@@ -16,7 +16,7 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="internet-health"{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'health-subpage' %}
+  <link href="{{ static('css/mozorg/internet-health/health-subpage.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header %}
@@ -432,5 +432,9 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'internet-health-subpage' %}
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/hubs/sub-nav.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/mozilla-smoothscroll.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/mozorg/internet-health/health-subpage.js') }}" charset="utf-8"></script>
 {% endblock %}

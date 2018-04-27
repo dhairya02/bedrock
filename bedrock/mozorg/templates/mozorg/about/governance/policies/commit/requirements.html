@@ -9,7 +9,7 @@
 
 {% block page_css %}
   {{ super() }}
-  {% stylesheet 'commit-access-requirements' %}
+  <link href="{{ static('css/mozorg/commit-access-requirements.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block article %}

@@ -10,7 +10,7 @@
 {% block canonical_urls %}<meta name="robots" content="noindex,follow">{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'nightly_firstrun' %}
+  <link href="{{ static('css/firefox/nightly_firstrun.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% add_lang_files "firstrun" "mobile" %}

@@ -10,7 +10,7 @@
 {% block canonical_urls %}<meta name="robots" content="noindex">{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'newsletter-opt-out-confirmation' %}
+  <link href="{{ static('css/newsletter/newsletter-opt-out-confirmation.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -80,5 +80,5 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'newsletter-mozilla' %}
+  <script type="text/javascript" src="{{ static('js/newsletter/mozilla.js') }}" charset="utf-8"></script>
 {% endblock %}

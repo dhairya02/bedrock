@@ -9,7 +9,7 @@
 {% block canonical_urls %}<meta name="robots" content="noindex,follow">{% endblock %}
 
 {% block extrahead %}
-  {% stylesheet 'nightly_whatsnew' %}
+  <link href="{{ static('css/firefox/whatsnew/whatsnew-nightly.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block page_title_prefix %}{% endblock %}
@@ -96,7 +96,8 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'firefox_whatsnew' %}
+  <script type="text/javascript" src="{{ static('js/base/send-to-device.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/whatsnew/whatsnew.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 {# Bug 1381776 #}

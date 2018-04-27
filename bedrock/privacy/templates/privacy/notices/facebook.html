@@ -7,7 +7,7 @@
 {% block page_title %}{{ doc.h1.string }}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'fb_privacy' %}
+  <link href="{{ static('css/privacy/fb-privacy.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_id %}fb-privacy{% endblock %}

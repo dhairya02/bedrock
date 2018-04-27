@@ -12,7 +12,8 @@
 {% block canonical_urls %}<meta name="robots" content="noindex,follow">{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_developer_firstrun' %}
+  <link href="{{ static('css/base/mozilla-modal.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/dev-firstrun.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block page_title_prefix %}{% endblock %}

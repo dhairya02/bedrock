@@ -151,6 +151,9 @@
 {% endblock contrib_content %}
 
 {% block js %}
-  {% javascript 'contribute-base' %}
-  {% javascript 'contribute-landing' %}
+  <script type="text/javascript" src="{{ static('js/mozorg/contribute/contribute-nav.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.cycle2.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/mozorg/contribute/contribute-landing.js') }}" charset="utf-8"></script>
 {% endblock %}

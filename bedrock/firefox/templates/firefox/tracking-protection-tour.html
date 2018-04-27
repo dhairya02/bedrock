@@ -46,7 +46,7 @@ data-panel3-button="{{ _('Got it!') }}"
 {% block stub_attribution %}{% endblock %}
 
 {% block site_css %}
-  {% stylesheet 'tracking-protection-tour' %}
+  <link href="{{ static('css/firefox/tracking-protection-tour.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block page_title_prefix %}{% endblock %}
@@ -121,7 +121,10 @@ data-panel3-button="{{ _('Got it!') }}"
 {% block email_form %}{% endblock %}
 
 {% block site_js %}
-  {% javascript 'tracking-protection-tour' %}
+  <script type="text/javascript" src="{{ static('js/libs/jquery-3.2.1.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/uitour-lib.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/tracking-protection-tour.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/tracking-protection-tour-init.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 {# Bug 1381776 #}

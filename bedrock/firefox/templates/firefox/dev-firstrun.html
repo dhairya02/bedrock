@@ -12,7 +12,8 @@
 {% block canonical_urls %}<meta name="robots" content="noindex,follow">{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_developer_firstrun' %}
+  <link href="{{ static('css/base/mozilla-modal.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/dev-firstrun.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block page_title_prefix %}{% endblock %}
@@ -240,7 +241,8 @@ data-sync-reminder-text="{{ _('If you continue without syncing your new Develope
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'firefox_developer_firstrun' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/dev-firstrun.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 {# Bug 1381776 #}

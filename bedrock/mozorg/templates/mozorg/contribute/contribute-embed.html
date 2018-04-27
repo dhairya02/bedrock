@@ -16,10 +16,16 @@
     <script src="{{ static('js/libs/html5shiv.js') }}"></script>
     <![endif]-->
 
-    {% stylesheet 'responsive' %}
-    {% stylesheet 'contribute-embed' %}
+    <link href="{{ static('css/sandstone/sandstone-resp.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ static('css/base/global-nav.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ static('css/base/notification-banner.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ static('css/tabzilla/tabzilla-static.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ static('css/mozorg/contribute/contribute-embed.css') }}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{ static('img/favicon.ico') }}">
-    {% javascript 'site' %}
+    <script type="text/javascript" src="{{ static('js/base/site.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/dnt-helper.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/mozilla-cookie-helper.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/core-datalayer-page-id.js') }}" charset="utf-8"></script>
 
     {% include 'includes/google-analytics.html' %}
   </head>
@@ -29,6 +35,18 @@
       <h3>{{ _('Volunteer Opportunities at Mozilla') }}</h3>
       <a href="{{ url('mozorg.contribute.index') }}">{{ _('Join a global community of game-changers.') }}</a>
     </div>
-    {% javascript 'common' %}
+    <script type="text/javascript" src="{{ static('js/libs/jquery-3.2.1.min.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/libs/spin.min.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/mozilla-utils.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/newsletter/form.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/mozilla-client.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/mozilla-image-helper.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/nav-main-resp.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/class-list-polyfill.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/mozilla-global-nav.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/base-page-init.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/core-datalayer.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/core-datalayer-init.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/search-params.js') }}" charset="utf-8"></script>
   </body>
 </html>

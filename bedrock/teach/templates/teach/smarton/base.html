@@ -10,11 +10,12 @@
 
 {% block page_css %}
   <!--[if !lte IE 8]><!-->
-    {% stylesheet 'smarton' %}
+    <link href="{{ static('css/base/mozilla-share-cta.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ static('css/teach/smarton.css') }}" rel="stylesheet" type="text/css" />
   <!--<![endif]-->
 
   <!--[if lte IE 8]>
-    {% stylesheet 'smarton-ie' %}
+    <link href="{{ static('css/teach/smarton-ie.css') }}" rel="stylesheet" type="text/css" />
   <![endif]-->
 {% endblock %}
 
@@ -67,11 +68,16 @@
 
 {% block js %}
   <!--[if IE 9]>
-    {% javascript 'matchmedia_addlistener' %}
+    <script type="text/javascript" src="{{ static('js/libs/matchMedia.addListener.js') }}" charset="utf-8"></script>
   <![endif]-->
 
   <!--[if !lte IE 8]><!-->
-    {% javascript 'smarton' %}
+    <script type="text/javascript" src="{{ static('js/base/mozilla-share-cta.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/base/mozilla-smoothscroll.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/libs/circles.min.js') }}" charset="utf-8"></script>
+    <script type="text/javascript" src="{{ static('js/teach/smarton.js') }}" charset="utf-8"></script>
   <!--<![endif]-->
 {% endblock %}
 

@@ -11,7 +11,8 @@
 {% block page_desc %}{{_('Get easy access to your bookmarks, passwords, tabs and more from any computer or mobile device running Firefox.')}}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_accounts' %}
+  <link href="{{ static('css/base/mozilla-fxa-iframe.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/accounts.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_class %}firefox-accounts{% endblock %}
@@ -63,5 +64,7 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'firefox_accounts' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-fxa-iframe.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/uitour-lib.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/accounts.js') }}" charset="utf-8"></script>
 {% endblock %}

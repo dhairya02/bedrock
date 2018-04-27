@@ -11,7 +11,7 @@
 
 {% block page_css %}
   {{ super() }}
-  {% stylesheet 'firefox-features-hub-detail' %}
+  <link href="{{ static('css/firefox/features/detail.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_id %}firefox-features-memory{% endblock %}

@@ -10,7 +10,7 @@
 
 {% block page_css %}
   {{ super() }}
-  {% stylesheet 'contribute-signup' %}
+  <link href="{{ static('css/mozorg/contribute/signup.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block contrib_nav_cta %}{% endblock %}
@@ -142,5 +142,5 @@
 
 {% block js %}
   {{ super() }}
-  {% javascript 'contribute-signup' %}
+  <script type="text/javascript" src="{{ static('js/mozorg/contribute/signup.js') }}" charset="utf-8"></script>
 {% endblock %}

@@ -48,5 +48,5 @@
 
 {% block js %}
   {{ super() }}
-  {% javascript 'contribute-stories' %}
+  <script type="text/javascript" src="{{ static('js/mozorg/contribute/contribute-stories.js') }}" charset="utf-8"></script>
 {% endblock %}

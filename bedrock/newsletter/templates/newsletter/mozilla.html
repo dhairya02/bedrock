@@ -26,11 +26,11 @@
 {% block body_class %}newsletter-mozilla{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'newsletter-mozilla' %}
+  <link href="{{ static('css/newsletter/newsletter-mozilla.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block js %}
-  {% javascript 'newsletter-mozilla' %}
+  <script type="text/javascript" src="{{ static('js/newsletter/mozilla.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 {% block site_header %}{% endblock %}

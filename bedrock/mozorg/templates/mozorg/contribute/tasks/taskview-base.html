@@ -7,7 +7,8 @@
 {% block body_class %}taskview{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'contribute-taskview' %}
+  <link href="{{ static('css/newsletter/moznewsletter-subscribe.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/mozorg/contribute/taskview.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header_nav %}{% endblock %}
@@ -59,5 +60,5 @@
 {% block site_footer %}{% endblock %}
 
 {% block js %}
-  {% javascript 'contribute-taskview' %}
+  <script type="text/javascript" src="{{ static('js/mozorg/contribute/taskview.js') }}" charset="utf-8"></script>
 {% endblock %}

@@ -4,7 +4,7 @@
 
 {% block site_css %}
   {{ super() }}
-  {% stylesheet 'pebbles-basic' %}
+  <link href="{{ static('css/pebbles/basic.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block tabzilla_tab %}{% endblock %}

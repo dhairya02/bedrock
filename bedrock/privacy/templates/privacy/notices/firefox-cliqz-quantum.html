@@ -7,5 +7,7 @@
 {% block body_class %}{{ super() }} product-firefox{% endblock %}
 
 {% block js %}
-  {% javascript 'privacy_quantum_firefox' %}
+  <script type="text/javascript" src="{{ static('js/base/uitour-lib.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/privacy/privacy-quantum.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/privacy/privacy-quantum-firefox.js') }}" charset="utf-8"></script>
 {% endblock %}

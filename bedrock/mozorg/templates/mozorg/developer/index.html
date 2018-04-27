@@ -16,7 +16,8 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="technology"{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'developer-hub' %}
+  <link href="{{ static('css/base/mozilla-modal.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/mozorg/developer/index.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header %}
@@ -422,5 +423,10 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'developer-hub' %}
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/hubs/sub-nav.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/mozilla-lazy-load.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/mozorg/developer/developer-hub.js') }}" charset="utf-8"></script>
 {% endblock %}

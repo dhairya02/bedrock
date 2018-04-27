@@ -6,7 +6,8 @@
 {% extends "base-resp.html" %}
 
 {% block page_css %}
-  {% stylesheet 'legal' %}
+  <link href="{{ static('css/legal/legal.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/newsletter/moznewsletter-subscribe.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_class %}sand{% endblock %}

@@ -5,7 +5,7 @@
 {% block body_class %}sand{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'legal_fraud_report' %}
+  <link href="{{ static('css/legal/fraud-report.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -202,5 +202,6 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'legal_fraud_report' %}
+  <script type="text/javascript" src="{{ static('js/libs/jquery.validate.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/legal/fraud-report.js') }}" charset="utf-8"></script>
 {% endblock  %}

@@ -10,11 +10,14 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="about-us"{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'mission' %}
+  <link href="{{ static('css/base/mozilla-video-poster.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/newsletter/moznewsletter-subscribe.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/mozorg/mission.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block js %}
-  {% javascript 'about_video' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-video-poster.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/mozorg/about-video.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 {% block content %}

@@ -21,7 +21,7 @@
 {% block body_id %}plugincheck{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'plugincheck' %}
+  <link href="{{ static('css/plugincheck/plugincheck.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 
@@ -112,5 +112,5 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'plugincheck' %}
+  <script type="text/javascript" src="{{ static('js/plugincheck/plugincheck.js') }}" charset="utf-8"></script>
 {% endblock %}

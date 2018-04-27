@@ -14,11 +14,12 @@
 {% block body_class %}sky happy{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_feedback' %}
+  <link href="{{ static('css/base/mozilla-share-cta.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/feedback.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block js %}
-  {% javascript 'firefox_feedback' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-share-cta.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 {% block site_header_nav %}{% endblock %}

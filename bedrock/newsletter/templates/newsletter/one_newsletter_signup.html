@@ -21,7 +21,7 @@
 
 {% block site_css %}
   {{ super() }}
-  {% stylesheet 'newsletter' %}
+  <link href="{{ static('css/newsletter/newsletter.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}

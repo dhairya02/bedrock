@@ -8,7 +8,8 @@
 {% block page_desc %}{{ _('We’re sorry to report this, but your computer does not meet the minimum system requirements to run this version.') }}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_unsupported_systems' %}
+  <link href="{{ static('css/base/menu-resp.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/unsupported-systems.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}

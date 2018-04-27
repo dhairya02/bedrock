@@ -13,7 +13,7 @@
 {% block global_nav %}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'contribute-friends' %}
+  <link href="{{ static('css/mozorg/contribute/friends.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block contrib_page_title %}{{ _('Join Firefox Friends today!') }}{% endblock %}
@@ -120,5 +120,6 @@
 {% block contrib_footer %}{% endblock contrib_footer %}
 
 {% block js %}
-  {% javascript 'contribute-friends' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-svg-image-fallback.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/mozorg/contribute/friends.js') }}" charset="utf-8"></script>
 {% endblock %}

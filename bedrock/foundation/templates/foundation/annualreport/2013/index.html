@@ -8,7 +8,8 @@
 {% block body_id %}annual-2013{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'annual_2013' %}
+  <link href="{{ static('css/base/mozilla-modal.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/foundation/annual2013.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header %}
@@ -153,5 +154,6 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'annual_2013' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/foundation/annual2013.js') }}" charset="utf-8"></script>
 {% endblock %}

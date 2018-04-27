@@ -18,8 +18,8 @@
 
 {% block page_css %}
   {{ super() }}
-  {% stylesheet 'firefox-features-hub-detail' %}
-  {% stylesheet 'firefox-features-sync' %}
+  <link href="{{ static('css/firefox/features/detail.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/features/sync.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_id %}firefox-features-sync{% endblock %}
@@ -110,5 +110,7 @@
 
 {% block js %}
   {{ super() }}
-  {% javascript 'firefox-features-sync' %}
+  <script type="text/javascript" src="{{ static('js/base/uitour-lib.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/features/sync.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/features/sync-init.js') }}" charset="utf-8"></script>
 {% endblock %}

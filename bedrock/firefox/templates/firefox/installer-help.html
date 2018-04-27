@@ -11,7 +11,9 @@
 {% block body_id %}installer-help{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'installer_help' %}
+  <link href="{{ static('css/base/menu-resp.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/base/mozilla-modal.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/installer-help.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -75,5 +77,6 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'installer_help' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/installer-help.js') }}" charset="utf-8"></script>
 {% endblock  %}

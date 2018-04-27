@@ -9,7 +9,8 @@
 {% extends "firefox/base-pebbles.html" %}
 
 {% block page_css %}
-  {% stylesheet 'firefox-mobile' %}
+  <link href="{{ static('css/base/send-to-device.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/mobile.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block page_title %}{{ _('Mobile browsers for iOS and Android') }} | {{ _('Firefox') }}{% endblock %}
@@ -406,5 +407,12 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'firefox-mobile' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/send-to-device.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/mozilla-smoothscroll.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/hubs/sub-nav.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/mobile/features-scroller.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/mobile/mobile.js') }}" charset="utf-8"></script>
 {% endblock %}

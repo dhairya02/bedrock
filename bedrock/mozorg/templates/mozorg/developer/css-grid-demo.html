@@ -13,7 +13,7 @@
 {% block body_class %}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'css-grid-demo' %}
+  <link href="{{ static('css/mozorg/developer/css-grid-demo.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header %}{% endblock %}
@@ -659,5 +659,8 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'css-grid-demo' %}
+  <script type="text/javascript" src="{{ static('js/base/mozilla-smoothscroll.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/mozorg/developer/css-grid-demo.js') }}" charset="utf-8"></script>
 {% endblock %}

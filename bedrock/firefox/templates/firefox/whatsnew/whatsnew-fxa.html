@@ -14,7 +14,8 @@
 {% block site_header %}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_whatsnew_fxa' %}
+  <link href="{{ static('css/base/mozilla-fxa-iframe.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ static('css/firefox/whatsnew/whatsnew-fxa.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -48,6 +49,9 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'firefox_whatsnew' %}
-  {% javascript 'firefox_whatsnew_fxa' %}
+  <script type="text/javascript" src="{{ static('js/base/send-to-device.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/whatsnew/whatsnew.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/uitour-lib.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/base/mozilla-fxa-iframe.js') }}" charset="utf-8"></script>
+  <script type="text/javascript" src="{{ static('js/firefox/whatsnew/whatsnew-fxa.js') }}" charset="utf-8"></script>
 {% endblock %}
