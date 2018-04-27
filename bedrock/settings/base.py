@@ -333,8 +333,8 @@ STATICFILES_FINDERS = (
     'pipeline.finders.PipelineFinder',
 )
 STATICFILES_DIRS = (
-    path('media'),
-    path('node_modules/@mozilla-protocol/core')
+    path('static_build'),
+    path('node_modules/@mozilla-protocol/core'),
 )
 
 PIPELINE = {
