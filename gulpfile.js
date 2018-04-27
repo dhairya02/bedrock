@@ -9,6 +9,8 @@ const gutil = require('gulp-util');
 const gulpif = require('gulp-if');
 const sass = require('gulp-sass');
 const less = require('gulp-less');
+const cleanCSS = require('gulp-clean-css');
+const uglify = require('gulp-uglify');
 const del = require('del');
 const karma = require('karma');
 const eslint = require('gulp-eslint');
@@ -45,7 +47,7 @@ var handleError = function (task) {
 };
 
 gulp.task('media:watch', () => {
-    return watch(['media/**/*', '!media/css/**/*'], {base: 'media', verbose: true})
+    return watch(['media/**/*', '!media/css/**/*.{scss,less}'], {base: 'media', verbose: true})
         .pipe(gulp.dest('static_build'));
 });
 
@@ -60,7 +62,19 @@ gulp.task('sass', function() {
 
 gulp.task('less', function() {
     return gulp.src(mediaEntrypoints.less, {base: 'media'})
-        .pipe(less().on('error', handleError('LESS')))
+        .pipe(less({inlineJavaScript: true, ieCompat: true}).on('error', handleError('LESS')))
+        .pipe(gulp.dest('static_build'));
+});
+
+gulp.task('css:minify', ['less', 'sass'], () => {
+    return gulp.src('static_build/css/**/*.css', {base: 'static_build'})
+        .pipe(cleanCSS().on('error', handleError('CLEANCSS')))
+        .pipe(gulp.dest('static_build'));
+});
+
+gulp.task('js:minify', ['assets'], () => {
+    return gulp.src('static_build/js/**/*.js', {base: 'static_build'})
+        .pipe(uglify().on('error', handleError('UGLIFY')))
         .pipe(gulp.dest('static_build'));
 });
 
@@ -94,7 +108,7 @@ gulp.task('static:clean', () => {
 });
 
 gulp.task('assets', () => {
-    return gulp.src(['media/**/*', '!media/css/**/*'], {base: 'media'})
+    return gulp.src(['media/**/*', '!media/css/**/*.{scss,less}'], {base: 'media'})
         .pipe(gulp.dest('static_build'));
 });
 
@@ -146,6 +160,6 @@ gulp.task('watch', ['assets', 'sass', 'less', 'browser-sync'], function () {
     gutil.log(gutil.colors.bgGreen('Watching for changes...'));
 });
 
-gulp.task('build', ['assets', 'sass']);
+gulp.task('build', ['js:minify', 'css:minify']);
 
 gulp.task('default', ['watch']);
