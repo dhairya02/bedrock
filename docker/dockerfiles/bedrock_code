@@ -14,8 +14,9 @@ COPY ./docker ./docker
 COPY ./vendor-local ./vendor-local
 COPY ./bedrock ./bedrock
 COPY ./media ./media
-COPY ./static ./static
-COPY ./node_modules ./node_modules
+COPY ./static_build ./static_build
+
+RUN honcho run --env docker/envfiles/prod.env docker/bin/build_staticfiles.sh
 
 ENV GIT_SHA ${GIT_COMMIT}
 # Change User
