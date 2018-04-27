@@ -26,6 +26,10 @@ def get_leading_space(line):
 
 
 class Command(BaseCommand):
+    """Command to convert all templates from Pipeline bundles to individual assets.
+
+    TODO: Delete me after pipeline removal.
+    """
     def handle(self, *args, **options):
         for template in ROOT.glob('bedrock/*/templates/**/*.html'):
             print('===============')
