@@ -5,7 +5,7 @@
 # To set them go to Job -> Configure -> Build Environment -> Inject
 # passwords and Inject env variables
 #
-set -ex
+set -exo pipefail
 
 BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $BIN_DIR/set_git_env_vars.sh

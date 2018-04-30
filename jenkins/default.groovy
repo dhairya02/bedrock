@@ -58,7 +58,8 @@ if ( config.push_public_registry != false ) {
                 utils.pushDockerhub('mozorg/bedrock_app')
             }
         } catch(err) {
-            utils.ircNotification([stage: 'Dockerhub Push Failed', status: 'warning'])
+            utils.ircNotification([stage: 'Dockerhub Push Failed', status: 'failure'])
+            throw err
         }
     }
 }
