@@ -3,17 +3,18 @@ services:
   assets:
     image: mozorg/bedrock_assets:latest
     command: gulp watch
-    user: ${UID:-bedrock}
     depends_on:
       - web
     ports:
       - "3000:3000"
     volumes:
-      - ./:/app:cached
+      - ./media/:/app/media:cached
+    environment:
+      BS_PROXY_URL: "web:8000"
   web:
     image: mozorg/bedrock:latest
     command: ./manage.py runserver 0.0.0.0:8000
-    user: ${UID:-bedrock}
+    env_file: .env
     ports:
       - "8000:8000"
     volumes:

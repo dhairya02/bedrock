@@ -54,6 +54,11 @@ function docker_cp() {
     fi
 }
 
+# pull latest images to build cache
+# but don't fail build if it fails
+docker pull mozorg/bedrock:latest || true
+docker pull mozorg/bedrock_assets:latest || true
+
 if ! imageExists "assets"; then
     docker/bin/docker_build.sh --pull "assets"
 fi

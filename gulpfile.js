@@ -113,8 +113,9 @@ gulp.task('assets', () => {
 });
 
 gulp.task('browser-sync', () => {
+    var proxyURL = process.env.BS_PROXY_URL || 'localhost:8000';
     browserSync({
-        proxy: 'localhost:8000',
+        proxy: proxyURL,
         serveStatic: [{
             route: '/media',
             dir: 'static_build'
