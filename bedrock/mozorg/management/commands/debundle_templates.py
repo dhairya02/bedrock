@@ -5,13 +5,15 @@ import re
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
+from bedrock.settings.static_media import PIPELINE_CSS, PIPELINE_JS
+
 
 ROOT = settings.ROOT_PATH
 PIPELINE_RE = re.compile(r"\{\% (stylesheet|javascript) '([^']+)' \%\}")
 SPACE_RE = re.compile(r'^\s+')
 BUNDLES = {
-    'javascript': settings.PIPELINE['JAVASCRIPT'],
-    'stylesheet': settings.PIPELINE['STYLESHEETS'],
+    'javascript': PIPELINE_JS,
+    'stylesheet': PIPELINE_CSS,
 }
 STYLE_TEMPLATE = '<link href="{{ static(\'%s\') }}" rel="stylesheet" type="text/css" />'
 JS_TEMPLATE = '<script type="text/javascript" src="{{ static(\'%s\') }}" charset="utf-8"></script>'

@@ -2,13 +2,9 @@ from __future__ import print_function, unicode_literals
 
 import json
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
 
-
-BUNDLES = {
-    'stylesheet': settings.PIPELINE['STYLESHEETS'],
-}
+from bedrock.settings.static_media import PIPELINE_CSS
 
 
 class Command(BaseCommand):
@@ -21,7 +17,7 @@ class Command(BaseCommand):
             'less': [],
             'sass': [],
         }
-        for bundle in BUNDLES['stylesheet'].values():
+        for bundle in PIPELINE_CSS.values():
             for filename in bundle['source_filenames']:
                 if filename.endswith('.less'):
                     output['less'].append(filename)
