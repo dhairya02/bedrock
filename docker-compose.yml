@@ -2,15 +2,17 @@ version: '3.4'
 services:
   assets:
     image: mozorg/bedrock_assets:latest
-    command: gulp watch
+    command: npm run docker-start
     depends_on:
       - web
     ports:
       - "3000:3000"
+      - "3001:3001"
     volumes:
       - ./media/:/app/media:cached
     environment:
       BS_PROXY_URL: "web:8000"
+      BS_OPEN_BROWSER: "false"
   web:
     image: mozorg/bedrock:latest
     command: ./manage.py runserver 0.0.0.0:8000

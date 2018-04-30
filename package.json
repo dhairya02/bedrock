@@ -42,6 +42,7 @@
     "browser-sync": "/.bin/browser-sync"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"python manage.py runserver\" \"gulp watch\""
+    "start": "concurrently --kill-others \"python manage.py runserver\" \"gulp watch\"",
+    "docker-start": "gulp static:clean && gulp watch"
   }
 }
