@@ -42,9 +42,9 @@ DOCKER_IMAGE_TAG="${DOCKER_REPO}/bedrock_${DOCKERFILE}:${DOCKER_TAG}"
 
 # build the docker image
 docker build -t "$DOCKER_IMAGE_TAG" \
-             --pull "$DOCKER_PULL" \
-             --no-cache "$DOCKER_NO_CACHE" \
-             --build-arg "GIT_SHA=${GIT_COMMIT}"
-             --build-arg "BRANCH_NAME=${BRANCH_NAME_SAFE}"
+             --pull="$DOCKER_PULL" \
+             --no-cache="$DOCKER_NO_CACHE" \
+             --build-arg="GIT_SHA=${GIT_COMMIT}" \
+             --build-arg="BRANCH_NAME=${BRANCH_NAME_SAFE}" \
              -f "$DOCKERFILE_PATH" \
              "$DOCKER_CTX"

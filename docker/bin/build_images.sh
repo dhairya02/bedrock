@@ -67,12 +67,3 @@ fi
 if $TEST_MODE && ! imageExists "test"; then
     docker/bin/docker_build.sh "test"
 fi
-
-if ! imageExists "l10n"; then
-    if [[ "$BRANCH_NAME" == "prod" ]]; then
-        ENVFILE="prod";
-    else
-        ENVFILE="master";
-    fi
-    docker/bin/docker_build.sh "l10n"
-fi

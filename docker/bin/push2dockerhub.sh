@@ -12,15 +12,13 @@ source $BIN_DIR/set_git_env_vars.sh
 
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
-if [[ "$FROM_DOCKER_REPOSITORY" == "mozorg/bedrock_l10n" ]]; then
+if [[ "$FROM_DOCKER_REPOSITORY" == "mozorg/bedrock_app" ]]; then
+    DOCKER_REPOSITORY="mozorg/bedrock"
     DOCKER_TAG="${BRANCH_NAME/\//-}-${GIT_COMMIT}"
-else
-    DOCKER_TAG="${GIT_COMMIT}"
-fi
-
-if [[ "$FROM_DOCKER_REPOSITORY" != "$DOCKER_REPOSITORY" ]]; then
-    # Tag using git hash
     docker tag $FROM_DOCKER_REPOSITORY:${DOCKER_TAG} $DOCKER_REPOSITORY:${DOCKER_TAG}
+else
+    DOCKER_REPOSITORY="${FROM_DOCKER_REPOSITORY}"
+    DOCKER_TAG="${GIT_COMMIT}"
 fi
 
 # Push to docker hub
@@ -31,4 +29,4 @@ if [[ "$GIT_TAG_DATE_BASED" == true ]]; then
     docker push $DOCKER_REPOSITORY:$GIT_TAG
     docker tag $FROM_DOCKER_REPOSITORY:${DOCKER_TAG} $DOCKER_REPOSITORY:latest
     docker push $DOCKER_REPOSITORY:latest
-fi;
+fi
