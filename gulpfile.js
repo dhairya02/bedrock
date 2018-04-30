@@ -113,7 +113,13 @@ gulp.task('assets', () => {
 });
 
 gulp.task('browser-sync', () => {
-    browserSync({proxy: 'localhost:8000'});
+    browserSync({
+        proxy: 'localhost:8000',
+        serveStatic: [{
+            route: '/media',
+            dir: 'static_build'
+        }]
+    });
 });
 
 gulp.task('reload-sass', ['sass'], browserSync.reload);

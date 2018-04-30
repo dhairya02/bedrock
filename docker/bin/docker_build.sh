@@ -37,7 +37,6 @@ if [[ "$DOCKERFILE" == "l10n" ]]; then
 else
     DOCKER_TAG="${GIT_COMMIT}"
 fi
-FINAL_DOCKERFILE="${DOCKER_CTX}/Dockerfile-$DOCKERFILE"
 DOCKER_IMAGE_TAG="${DOCKER_REPO}/bedrock_${DOCKERFILE}:${DOCKER_TAG}"
 
 # build the docker image
@@ -48,3 +47,9 @@ docker build -t "$DOCKER_IMAGE_TAG" \
              --build-arg="BRANCH_NAME=${BRANCH_NAME_SAFE}" \
              -f "$DOCKERFILE_PATH" \
              "$DOCKER_CTX"
+
+# add latest tags locally
+docker tag "$DOCKER_IMAGE_TAG" "${DOCKER_REPO}/bedrock_${DOCKERFILE}:latest"
+if [[ "$DOCKERFILE" == "app" ]]; then
+    docker tag "$DOCKER_IMAGE_TAG" "${DOCKER_REPO}/bedrock:latest"
+fi
