@@ -26,3 +26,33 @@ COPY ./requirements /app/requirements
 # Install Python deps
 RUN pip install --no-cache-dir -r requirements/prod.txt
 RUN pip install --no-cache-dir -r requirements/docker.txt
+
+# changes infrequently
+COPY ./bin ./bin
+COPY ./etc ./etc
+COPY ./lib ./lib
+COPY ./root_files ./root_files
+COPY ./scripts ./scripts
+COPY ./wsgi ./wsgi
+COPY manage.py LICENSE newrelic.ini contribute.json ./
+
+# changes more frequently
+COPY ./docker ./docker
+COPY ./vendor-local ./vendor-local
+COPY ./bedrock ./bedrock
+COPY ./media ./media
+COPY ./static_build ./static_build
+
+RUN honcho run --env docker/envfiles/prod.env docker/bin/build_staticfiles.sh
+
+# build args
+ARG GIT_SHA=none
+ARG BRANCH_NAME=master
+ENV GIT_SHA ${GIT_SHA}
+ENV BRANCH_NAME=${BRANCH_NAME}
+RUN echo "${GIT_SHA}" > ./static/revision.txt
+RUN bin/run-sync-all.sh
+
+# Change User
+RUN chown webdev.webdev -R .
+USER webdev

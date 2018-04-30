@@ -54,20 +54,13 @@ function docker_cp() {
     fi
 }
 
-if ! imageExists "base"; then
-    docker/bin/docker_build.sh --pull "base"
+if ! imageExists "assets"; then
+    docker/bin/docker_build.sh --pull "assets"
 fi
 
-# build the static files using the builder image
-# and include those and the app in a code image
-if ! imageExists "code"; then
-    # build a staticfiles builder image
-    if ! imageExists "build"; then
-        docker/bin/docker_build.sh "build"
-    fi
-    docker_cp build /app/static_build/. ./static_build
-    echo "${GIT_COMMIT}" > ./static/revision.txt
-    docker/bin/docker_build.sh "code"
+if ! imageExists "app"; then
+    docker_cp assets /app/static_build/. ./static_build
+    docker/bin/docker_build.sh --pull "app"
 fi
 
 # build a tester image for non-demo deploys

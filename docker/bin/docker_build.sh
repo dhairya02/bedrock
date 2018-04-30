@@ -30,6 +30,7 @@ while [[ $# -gt 1 ]]; do
 done
 
 DOCKERFILE="$1"
+DOCKERFILE_PATH="docker/dockerfiles/bedrock_${DOCKERFILE}"
 BRANCH_NAME_SAFE="${BRANCH_NAME/\//-}"
 if [[ "$DOCKERFILE" == "l10n" ]]; then
     DOCKER_TAG="${BRANCH_NAME_SAFE}-${GIT_COMMIT}"
@@ -39,13 +40,11 @@ fi
 FINAL_DOCKERFILE="${DOCKER_CTX}/Dockerfile-$DOCKERFILE"
 DOCKER_IMAGE_TAG="${DOCKER_REPO}/bedrock_${DOCKERFILE}:${DOCKER_TAG}"
 
-# generate the dockerfile
-rm -f "$FINAL_DOCKERFILE"
-sed -e "s/\${GIT_COMMIT}/${GIT_COMMIT}/g;s/\${BRANCH_NAME}/${BRANCH_NAME_SAFE}/g" "docker/dockerfiles/bedrock_$DOCKERFILE" > "$FINAL_DOCKERFILE"
-
 # build the docker image
 docker build -t "$DOCKER_IMAGE_TAG" \
-             --pull="$DOCKER_PULL" \
-             --no-cache="$DOCKER_NO_CACHE" \
-             -f "$FINAL_DOCKERFILE" \
+             --pull "$DOCKER_PULL" \
+             --no-cache "$DOCKER_NO_CACHE" \
+             --build-arg "GIT_SHA=${GIT_COMMIT}"
+             --build-arg "BRANCH_NAME=${BRANCH_NAME_SAFE}"
+             -f "$DOCKERFILE_PATH" \
              "$DOCKER_CTX"
