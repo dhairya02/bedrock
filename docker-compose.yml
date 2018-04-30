@@ -10,6 +10,7 @@ services:
       - "3001:3001"
     volumes:
       - ./media/:/app/media:cached
+      - ./bedrock/:/app/bedrock:cached
     environment:
       BS_PROXY_URL: "web:8000"
       BS_OPEN_BROWSER: "false"
