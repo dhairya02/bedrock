@@ -11,6 +11,7 @@ const sass = require('gulp-sass');
 const less = require('gulp-less');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
+const sourcemaps = require('gulp-sourcemaps');
 const del = require('del');
 const karma = require('karma');
 const eslint = require('gulp-eslint');
@@ -53,16 +54,28 @@ gulp.task('media:watch', () => {
 
 gulp.task('sass', function() {
     return gulp.src(mediaEntrypoints.sass, {base: 'media'})
+        .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(sass({
             sourceComments: !production,
             outputStyle: production ? 'compressed' : 'nested'
         }).on('error', handleError('SASS')))
+        // we don't serve the source files
+        // so include scss content inside the sourcemaps
+        .pipe(gulpif(!production, sourcemaps.write({
+            'includeContent': true
+        })))
         .pipe(gulp.dest('static_build'));
 });
 
 gulp.task('less', function() {
     return gulp.src(mediaEntrypoints.less, {base: 'media'})
+        .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(less({inlineJavaScript: true, ieCompat: true}).on('error', handleError('LESS')))
+        // we don't serve the source files
+        // so include scss content inside the sourcemaps
+        .pipe(gulpif(!production, sourcemaps.write({
+            'includeContent': true
+        })))
         .pipe(gulp.dest('static_build'));
 });
 
