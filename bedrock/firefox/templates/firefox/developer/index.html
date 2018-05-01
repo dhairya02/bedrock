@@ -14,7 +14,7 @@
 
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/firefox_developer.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_developer' %}
 {% endblock %}
 
 {% block body_id %}firefox-developer{% endblock %}
@@ -238,5 +238,5 @@
 {% block update_notification %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_developer.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_developer' %}
 {% endblock %}

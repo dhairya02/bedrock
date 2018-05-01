@@ -5,11 +5,11 @@
 
 {% block page_css %}
   {{ super() }}
-  <link href="{{ static('css/BUNDLES/security-bug-bounty-hall-of-fame.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'security-bug-bounty-hall-of-fame' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/accordion.js') }}" charset="utf-8"></script>
+  {% javascript 'accordion' %}
 {% endblock %}
 
 {% block article %}

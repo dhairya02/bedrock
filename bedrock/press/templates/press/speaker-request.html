@@ -5,7 +5,7 @@
 {% block body_class %}sand{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/press.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'press' %}
 {% endblock %}
 
 {% block content %}
@@ -270,5 +270,5 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/press_speaker_request.js') }}" charset="utf-8"></script>
+  {% javascript 'press_speaker_request' %}
 {% endblock  %}

@@ -10,11 +10,11 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="about-us"{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/about-leadership.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'about-leadership' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/about-leadership.js') }}" charset="utf-8"></script>
+  {% javascript 'about-leadership' %}
 {% endblock %}
 
 {% block site_header_logo %}{% endblock %}

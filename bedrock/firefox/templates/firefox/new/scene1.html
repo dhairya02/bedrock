@@ -9,7 +9,7 @@
 {# All stylesheets are loaded in extrahead to serve legacy IE basic styles #}
 {% block extrahead %}
   {{ super() }}
-  <link href="{{ static('css/BUNDLES/firefox_new_scene1.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_new_scene1' %}
 {% endblock %}
 
 {% block body_id %}firefox-new-scene1{% endblock %}
@@ -122,5 +122,5 @@
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_new_scene1.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_new_scene1' %}
 {% endblock %}

@@ -16,10 +16,10 @@
     <script src="{{ static('js/libs/html5shiv.js') }}"></script>
     <![endif]-->
 
-    <link href="{{ static('css/BUNDLES/responsive.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ static('css/BUNDLES/contribute-embed.css') }}" rel="stylesheet" type="text/css" />
+    {% stylesheet 'responsive' %}
+    {% stylesheet 'contribute-embed' %}
     <link rel="shortcut icon" href="{{ static('img/favicon.ico') }}">
-    <script type="text/javascript" src="{{ static('js/BUNDLES/site.js') }}" charset="utf-8"></script>
+    {% javascript 'site' %}
 
     {% include 'includes/google-analytics.html' %}
   </head>
@@ -29,6 +29,6 @@
       <h3>{{ _('Volunteer Opportunities at Mozilla') }}</h3>
       <a href="{{ url('mozorg.contribute.index') }}">{{ _('Join a global community of game-changers.') }}</a>
     </div>
-    <script type="text/javascript" src="{{ static('js/BUNDLES/common.js') }}" charset="utf-8"></script>
+    {% javascript 'common' %}
   </body>
 </html>

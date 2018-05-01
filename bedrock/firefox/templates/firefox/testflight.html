@@ -18,7 +18,7 @@
 {% block body_class %}{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/firefox_ios_testflight.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_ios_testflight' %}
 {% endblock %}
 
 {% block site_header_nav %}{% endblock %}

@@ -10,11 +10,11 @@
 
 {% block page_css %}
   <!--[if !lte IE 8]><!-->
-    <link href="{{ static('css/BUNDLES/smarton.css') }}" rel="stylesheet" type="text/css" />
+    {% stylesheet 'smarton' %}
   <!--<![endif]-->
 
   <!--[if lte IE 8]>
-    <link href="{{ static('css/BUNDLES/smarton-ie.css') }}" rel="stylesheet" type="text/css" />
+    {% stylesheet 'smarton-ie' %}
   <![endif]-->
 {% endblock %}
 
@@ -67,11 +67,11 @@
 
 {% block js %}
   <!--[if IE 9]>
-    <script type="text/javascript" src="{{ static('js/BUNDLES/matchmedia_addlistener.js') }}" charset="utf-8"></script>
+    {% javascript 'matchmedia_addlistener' %}
   <![endif]-->
 
   <!--[if !lte IE 8]><!-->
-    <script type="text/javascript" src="{{ static('js/BUNDLES/smarton.js') }}" charset="utf-8"></script>
+    {% javascript 'smarton' %}
   <!--<![endif]-->
 {% endblock %}
 

@@ -10,11 +10,11 @@
 
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/about-patents.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'about-patents' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/accordion.js') }}" charset="utf-8"></script>
+  {% javascript 'accordion' %}
 {% endblock %}
 
 {% block article %}

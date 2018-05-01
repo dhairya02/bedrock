@@ -4,7 +4,7 @@
 {% block body_class %}sand{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/press.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'press' %}
 {% endblock %}
 
 {% block content %}

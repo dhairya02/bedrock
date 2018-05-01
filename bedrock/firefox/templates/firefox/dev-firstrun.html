@@ -12,7 +12,7 @@
 {% block canonical_urls %}<meta name="robots" content="noindex,follow">{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/firefox_developer_firstrun.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_developer_firstrun' %}
 {% endblock %}
 
 {% block page_title_prefix %}{% endblock %}
@@ -240,7 +240,7 @@ data-sync-reminder-text="{{ _('If you continue without syncing your new Develope
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_developer_firstrun.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_developer_firstrun' %}
 {% endblock %}
 
 {# Bug 1381776 #}

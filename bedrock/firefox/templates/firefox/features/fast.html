@@ -11,7 +11,7 @@
 
 {% block page_css %}
   {{ super() }}
-  <link href="{{ static('css/BUNDLES/firefox-features-hub-detail.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox-features-hub-detail' %}
 {% endblock %}
 
 {% block body_id %}firefox-features-fast{% endblock %}

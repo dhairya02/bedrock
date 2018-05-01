@@ -12,11 +12,11 @@
 {% block body_class %}newsletter-developer{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/newsletter-developer.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'newsletter-developer' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/newsletter-developer.js') }}" charset="utf-8"></script>
+  {% javascript 'newsletter-developer' %}
 {% endblock %}
 
 {% block site_header %}{% endblock %}

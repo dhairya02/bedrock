@@ -13,11 +13,11 @@
 {% endblock %}
 
 {% block site_css %}
-  <link href="{{ static('css/BUNDLES/firefox_firstrun.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_firstrun' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_firstrun.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_firstrun' %}
 {% endblock %}
 
 {% block global_nav %}{% endblock %}

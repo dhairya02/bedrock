@@ -11,7 +11,7 @@
 {% block body_id %}installer-help{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/installer_help.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'installer_help' %}
 {% endblock %}
 
 {% block content %}
@@ -75,5 +75,5 @@
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/installer_help.js') }}" charset="utf-8"></script>
+  {% javascript 'installer_help' %}
 {% endblock  %}

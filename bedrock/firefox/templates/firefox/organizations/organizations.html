@@ -10,7 +10,7 @@
 {% block body_id %}organizations{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/firefox_organizations.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_organizations' %}
 {% endblock %}
 
 {% block site_header_nav %}

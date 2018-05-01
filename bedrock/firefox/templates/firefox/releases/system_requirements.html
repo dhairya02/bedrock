@@ -13,7 +13,7 @@
 {% block body_class %}fxos-notes sky{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/firefox_releasenotes.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_releasenotes' %}
 {% endblock %}
 
 {% block content %}

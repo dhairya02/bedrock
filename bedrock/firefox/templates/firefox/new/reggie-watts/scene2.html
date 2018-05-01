@@ -35,7 +35,7 @@
 
 {% block js %}
   {% if switch('tracking-pixel') %}
-    <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_new_pixel.js') }}" charset="utf-8"></script>
+    {% javascript 'firefox_new_pixel' %}
   {% endif %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_new_scene2.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_new_scene2' %}
 {% endblock %}

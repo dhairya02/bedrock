@@ -14,11 +14,11 @@
 {% block body_class %}sky happy{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/firefox_feedback.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_feedback' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_feedback.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_feedback' %}
 {% endblock %}
 
 {% block site_header_nav %}{% endblock %}

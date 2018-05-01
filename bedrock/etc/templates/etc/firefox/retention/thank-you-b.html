@@ -20,7 +20,7 @@
 {% block canonical_urls %}<meta name="robots" content="noindex,follow">{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/etc-firefox-retention-thank-you-b.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'etc-firefox-retention-thank-you-b' %}
 {% endblock %}
 
 {% block site_header %}{% endblock %}
@@ -91,7 +91,7 @@
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/etc-firefox-retention-thank-you.js') }}" charset="utf-8"></script>
+  {% javascript 'etc-firefox-retention-thank-you' %}
 {% endblock %}
 
 {% block body_id %}thank-you{% endblock %}

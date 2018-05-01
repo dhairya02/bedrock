@@ -8,14 +8,14 @@
 {% block body_class %}sand about-transparency{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/about-transparency.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'about-transparency' %}
 {% endblock %}
 
 {% block js %}
   <!--[if IE 9]>
-  <script type="text/javascript" src="{{ static('js/BUNDLES/matchmedia_addlistener.js') }}" charset="utf-8"></script>
+  {% javascript 'matchmedia_addlistener' %}
   <![endif]-->
-  <script type="text/javascript" src="{{ static('js/BUNDLES/about-transparency.js') }}" charset="utf-8"></script>
+  {% javascript 'about-transparency' %}
 {% endblock %}
 
 {% block content %}

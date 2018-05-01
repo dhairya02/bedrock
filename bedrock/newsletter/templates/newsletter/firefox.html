@@ -12,11 +12,11 @@
 {% block body_class %}newsletter-mozilla{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/newsletter-firefox.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'newsletter-firefox' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/newsletter-firefox.js') }}" charset="utf-8"></script>
+  {% javascript 'newsletter-firefox' %}
 {% endblock %}
 
 {% block site_header %}{% endblock %}

@@ -13,7 +13,7 @@
 {% block body_class %}{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/BUNDLES/css-grid-demo.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'css-grid-demo' %}
 {% endblock %}
 
 {% block site_header %}{% endblock %}
@@ -659,5 +659,5 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/BUNDLES/css-grid-demo.js') }}" charset="utf-8"></script>
+  {% javascript 'css-grid-demo' %}
 {% endblock %}
