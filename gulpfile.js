@@ -228,11 +228,6 @@ gulp.task('watch', ['assets', 'js:compile', 'css:compile', 'browser-sync'], func
     // --------------------------
     gulp.watch('bedrock/*/templates/**/*.html', ['reload']);
 
-    // --------------------------
-    // watch:python
-    // --------------------------
-    gulp.watch('bedrock/**/*.py', ['reload']);
-
     gutil.log(gutil.colors.bgGreen('Watching for changes...'));
 });
 
