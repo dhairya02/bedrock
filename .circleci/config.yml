@@ -23,10 +23,9 @@ jobs:
             docker/bin/run_tests.sh
             mkdir -p docker-cache
             docker save -o docker-cache/images.tar \
-                "mozorg/bedrock_base:${CIRCLE_SHA1}" \
-                "mozorg/bedrock_build:${CIRCLE_SHA1}" \
-                "mozorg/bedrock_code:${CIRCLE_SHA1}" \
-                "mozorg/bedrock_test:${CIRCLE_SHA1}"
+                "mozorg/bedrock_app:latest" \
+                "mozorg/bedrock_assets:latest" \
+                "mozorg/bedrock_test:latest"
       - save_cache:
           key: v1-docker-layers-{{ checksum ".current-git-hash" }}
           paths:
