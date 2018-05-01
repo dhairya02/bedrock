@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
-/* global __dirname, require */
+/* global __dirname, require, process */
 
 const gulp = require('gulp');
 const gutil = require('gulp-util');
@@ -39,9 +39,6 @@ const lintPathsCSS = [
 
 // gulp build --production
 var production = !!argv.production;
-// determine if we're doing a build
-// and if so, bypass the livereload
-var build = argv._.length ? argv._[0] === 'build' : false;
 
 var allBundleFiles = function (fileType, fileExt) {
     let allFiles = [];
@@ -53,10 +50,6 @@ var allBundleFiles = function (fileType, fileExt) {
         });
     });
     return allFiles;
-};
-
-var allLess = function (file) {
-    return file.path.endsWith('.less');
 };
 
 var handleError = function (task) {
