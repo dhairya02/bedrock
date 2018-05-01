@@ -91,14 +91,14 @@ gulp.task('css:compile', ['sass', 'less'], function() {
     }));
 });
 
-gulp.task('js:compile', ['assets'], function() {
+gulp.task('js:compile', function() {
     return merge(staticBundles.js.map(function(bundle){
         var bundleFilename = `js/BUNDLES/${bundle.name}.js`;
-        return gulp.src(bundle.files, {base: 'static_build', 'cwd': 'static_build'})
+        return gulp.src(bundle.files, {base: 'media', 'cwd': 'media'})
             .pipe(gulpif(!production, sourcemaps.init()))
             .pipe(concat(bundleFilename))
             .pipe(gulpif(!production, sourcemaps.write({
-                'includeContent': false
+                'includeContent': true
             })))
             .pipe(gulp.dest('static_build'));
     }));
@@ -168,13 +168,16 @@ gulp.task('css:lint', () => {
         }));
 });
 
-gulp.task('static:clean', () => {
+gulp.task('clean', () => {
     return del(['static_build']);
 });
 
 gulp.task('assets', () => {
-    return gulp.src(['media/**/*', '!media/css/**/*.{scss,less}'], {base: 'media'})
-        .pipe(gulp.dest('static_build'));
+    return gulp.src([
+        'media/**/*',
+        '!media/css/**/*.{scss,less}',
+        '!media/js/**/*.js'
+    ], {base: 'media'}).pipe(gulp.dest('static_build'));
 });
 
 gulp.task('browser-sync', () => {
@@ -197,7 +200,7 @@ gulp.task('reload', browserSync.reload);
 // --------------------------
 // DEV/WATCH TASK
 // --------------------------
-gulp.task('watch', ['assets', 'sass', 'less', 'browser-sync'], function () {
+gulp.task('watch', ['assets', 'js:compile', 'css:compile', 'browser-sync'], function () {
     gulp.start('media:watch');
 
     // --------------------------
@@ -211,14 +214,14 @@ gulp.task('watch', ['assets', 'sass', 'less', 'browser-sync'], function () {
     gulp.watch('media/css/**/*.scss', ['css:compile']);
 
     // --------------------------
+    // watch:js
+    // --------------------------
+    gulp.watch('media/js/**/*.js', ['js:lint', 'reload-js']);
+
+    // --------------------------
     // watch:css
     // --------------------------
     gulp.watch('static_build/css/**/*.css', ['css:lint', 'reload']);
-
-    // --------------------------
-    // watch:js
-    // --------------------------
-    gulp.watch('static_build/js/**/*.js', ['js:lint', 'reload-js']);
 
     // --------------------------
     // watch:html
@@ -233,6 +236,6 @@ gulp.task('watch', ['assets', 'sass', 'less', 'browser-sync'], function () {
     gutil.log(gutil.colors.bgGreen('Watching for changes...'));
 });
 
-gulp.task('build', ['js:minify', 'css:minify']);
+gulp.task('build', ['assets', 'js:minify', 'css:minify']);
 
 gulp.task('default', ['watch']);
