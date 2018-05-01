@@ -73,13 +73,7 @@ gulp.task('css:compile', ['sass', 'less'], function() {
             return fileName;
         });
         return gulp.src(cssFiles, {base: 'static_build', 'cwd': 'static_build'})
-            .pipe(gulpif(!production, sourcemaps.init()))
             .pipe(concat(bundleFilename))
-            // we don't serve the source files
-            // so include scss content inside the sourcemaps
-            .pipe(gulpif(!production, sourcemaps.write({
-                'includeContent': true
-            })))
             .pipe(gulp.dest('static_build'));
     }));
 });
