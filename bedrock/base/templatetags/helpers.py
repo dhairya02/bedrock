@@ -114,6 +114,18 @@ def static(path):
 
 
 @library.global_function
+def js_bundle(name):
+    path = 'js/BUNDLES/{}.js'.format(name)
+    return staticfiles_storage.url(path)
+
+
+@library.global_function
+def css_bundle(name):
+    path = 'css/BUNDLES/{}.css'.format(name)
+    return staticfiles_storage.url(path)
+
+
+@library.global_function
 def alternate_url(path, locale):
     alt_paths = settings.ALT_CANONICAL_PATHS
     path = path.lstrip('/')
