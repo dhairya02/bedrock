@@ -11,6 +11,7 @@ const sass = require('gulp-sass');
 const less = require('gulp-less');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
+const concat = require('gulp-concat');
 const sourcemaps = require('gulp-sourcemaps');
 const del = require('del');
 const karma = require('karma');
@@ -19,7 +20,8 @@ const watch = require('gulp-watch');
 const gulpStylelint = require('gulp-stylelint');
 const argv = require('yargs').argv;
 const browserSync = require('browser-sync');
-const mediaEntrypoints = require('./media-entrypoints.json');
+const merge = require('merge-stream');
+const staticBundles = require('./static-bundles.json');
 
 const lintPathsJS = [
     'media/js/**/*.js',
@@ -41,6 +43,22 @@ var production = !!argv.production;
 // and if so, bypass the livereload
 var build = argv._.length ? argv._[0] === 'build' : false;
 
+var allBundleFiles = function (fileType, fileExt) {
+    let allFiles = [];
+    staticBundles[fileType].forEach(function(bundle){
+        bundle.files.forEach(function(bFile){
+            if (bFile.endsWith(fileExt)) {
+                allFiles.push(bFile);
+            }
+        });
+    });
+    return allFiles;
+};
+
+var allLess = function (file) {
+    return file.path.endsWith('.less');
+};
+
 var handleError = function (task) {
     return function (err) {
         gutil.log(gutil.colors.bgRed(task + ' error:'), gutil.colors.red(err));
@@ -52,8 +70,42 @@ gulp.task('media:watch', () => {
         .pipe(gulp.dest('static_build'));
 });
 
+gulp.task('css:compile', ['sass', 'less'], function() {
+    return merge(staticBundles.css.map(function(bundle){
+        var bundleFilename = `css/BUNDLES/${bundle.name}.css`;
+        var cssFiles = bundle.files.map(function(fileName){
+            if (!fileName.endsWith('.css')) {
+                return fileName.replace(/\.(less|scss)$/i, '.css');
+            }
+            return fileName;
+        });
+        return gulp.src(cssFiles, {base: 'static_build', 'cwd': 'static_build'})
+            .pipe(gulpif(!production, sourcemaps.init()))
+            .pipe(concat(bundleFilename))
+            // we don't serve the source files
+            // so include scss content inside the sourcemaps
+            .pipe(gulpif(!production, sourcemaps.write({
+                'includeContent': true
+            })))
+            .pipe(gulp.dest('static_build'));
+    }));
+});
+
+gulp.task('js:compile', ['assets'], function() {
+    return merge(staticBundles.js.map(function(bundle){
+        var bundleFilename = `js/BUNDLES/${bundle.name}.js`;
+        return gulp.src(bundle.files, {base: 'static_build', 'cwd': 'static_build'})
+            .pipe(gulpif(!production, sourcemaps.init()))
+            .pipe(concat(bundleFilename))
+            .pipe(gulpif(!production, sourcemaps.write({
+                'includeContent': false
+            })))
+            .pipe(gulp.dest('static_build'));
+    }));
+});
+
 gulp.task('sass', function() {
-    return gulp.src(mediaEntrypoints.sass, {base: 'media'})
+    return gulp.src(allBundleFiles('css', '.scss'), {base: 'media', cwd: 'media'})
         .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(sass({
             sourceComments: !production,
@@ -68,7 +120,7 @@ gulp.task('sass', function() {
 });
 
 gulp.task('less', function() {
-    return gulp.src(mediaEntrypoints.less, {base: 'media'})
+    return gulp.src(allBundleFiles('css', '.less'), {base: 'media', cwd: 'media'})
         .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(less({inlineJavaScript: true, ieCompat: true}).on('error', handleError('LESS')))
         // we don't serve the source files
@@ -79,13 +131,13 @@ gulp.task('less', function() {
         .pipe(gulp.dest('static_build'));
 });
 
-gulp.task('css:minify', ['less', 'sass'], () => {
+gulp.task('css:minify', ['css:compile'], () => {
     return gulp.src('static_build/css/**/*.css', {base: 'static_build'})
         .pipe(cleanCSS().on('error', handleError('CLEANCSS')))
         .pipe(gulp.dest('static_build'));
 });
 
-gulp.task('js:minify', ['assets'], () => {
+gulp.task('js:minify', ['js:compile'], () => {
     return gulp.src('static_build/js/**/*.js', {base: 'static_build'})
         .pipe(uglify().on('error', handleError('UGLIFY')))
         .pipe(gulp.dest('static_build'));
@@ -138,9 +190,8 @@ gulp.task('browser-sync', () => {
     });
 });
 
-gulp.task('reload-sass', ['sass'], browserSync.reload);
-gulp.task('reload-less', ['less'], browserSync.reload);
-gulp.task('reload-js', ['assets'], browserSync.reload);
+gulp.task('reload-css', ['css:compile'], browserSync.reload);
+gulp.task('reload-js', ['js:compile'], browserSync.reload);
 gulp.task('reload', browserSync.reload);
 
 // --------------------------
@@ -152,12 +203,12 @@ gulp.task('watch', ['assets', 'sass', 'less', 'browser-sync'], function () {
     // --------------------------
     // watch:less
     // --------------------------
-    gulp.watch('media/css/**/*.less', ['less']);
+    gulp.watch('media/css/**/*.less', ['css:compile']);
 
     // --------------------------
     // watch:sass
     // --------------------------
-    gulp.watch('media/css/**/*.scss', ['sass']);
+    gulp.watch('media/css/**/*.scss', ['css:compile']);
 
     // --------------------------
     // watch:css
