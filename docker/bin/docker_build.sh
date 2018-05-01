@@ -32,7 +32,7 @@ done
 DOCKERFILE="$1"
 DOCKERFILE_PATH="docker/dockerfiles/bedrock_${DOCKERFILE}"
 BRANCH_NAME_SAFE="${BRANCH_NAME/\//-}"
-if [[ "$DOCKERFILE" == "l10n" ]]; then
+if [[ "$DOCKERFILE" == "app" ]]; then
     DOCKER_TAG="${BRANCH_NAME_SAFE}-${GIT_COMMIT}"
 else
     DOCKER_TAG="${GIT_COMMIT}"
