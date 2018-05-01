@@ -13,14 +13,11 @@
 {% endblock %}
 
 {% block site_css %}
-  <link href="{{ static('css/base/notification-banner.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/firefox/firstrun/firstrun.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/base/mozilla-fxa-iframe.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_firstrun' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/base/mozilla-fxa-iframe.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/firefox/firstrun/firstrun.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_firstrun' %}
 {% endblock %}
 
 {% block global_nav %}{% endblock %}

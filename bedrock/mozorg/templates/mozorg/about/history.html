@@ -12,12 +12,11 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="about-us"{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/mozorg/history-slides.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'history-slides' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/libs/jquery.sequence.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/mozorg/history-slides.js') }}" charset="utf-8"></script>
+  {% javascript 'history-slides' %}
 {% endblock %}
 
 {% block site_header_logo %}{% endblock %}

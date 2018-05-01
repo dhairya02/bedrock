@@ -12,12 +12,11 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="get-involved"{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/base/mozilla-modal.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/mozorg/contribute/contribute-base.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'contribute-base' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/mozorg/contribute/contribute-nav.js') }}" charset="utf-8"></script>
+  {% javascript 'contribute-base' %}
 {% endblock %}
 
 {% block site_header_nav %}{% endblock %}

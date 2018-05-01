@@ -32,8 +32,7 @@
 
 {% block experiments %}
   {% if switch('experiment-home-2018', ['en-US']) %}
-    <script type="text/javascript" src="{{ static('js/base/mozilla-traffic-cop.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/mozorg/home/experiment-home.js') }}" charset="utf-8"></script>
+    {% javascript 'experiment-home' %}
   {% endif %}
 {% endblock %}
 
@@ -45,8 +44,7 @@
 {% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/newsletter/moznewsletter-subscribe.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/mozorg/home/home.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'home' %}
 {% endblock %}
 
 {% block site_header %}

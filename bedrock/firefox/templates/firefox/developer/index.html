@@ -14,7 +14,7 @@
 
 
 {% block page_css %}
-  <link href="{{ static('css/firefox/developer/developer.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_developer' %}
 {% endblock %}
 
 {% block body_id %}firefox-developer{% endblock %}
@@ -238,7 +238,5 @@
 {% block update_notification %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/hubs/sub-nav.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_developer' %}
 {% endblock %}

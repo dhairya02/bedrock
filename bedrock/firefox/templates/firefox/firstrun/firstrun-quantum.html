@@ -8,8 +8,7 @@
 
 {% block experiments %}
   {% if switch('firstrun-copy-experiment', ['en-US']) %}
-    <script type="text/javascript" src="{{ static('js/base/mozilla-traffic-cop.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/firefox/firstrun/experiment-firstrun-copy.js') }}" charset="utf-8"></script>
+    {% javascript 'experiment_firstrun_copy' %}
   {% endif %}
 {% endblock %}
 
@@ -20,8 +19,7 @@
 {% endblock %}
 
 {% block site_css %}
-  <link href="{{ static('css/firefox/firstrun/firstrun-quantum.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/base/mozilla-fxa-iframe.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_firstrun_quantum' %}
 {% endblock %}
 
 {% block global_nav %}{% endblock %}
@@ -71,7 +69,5 @@
 {% block update_notification %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/base/uitour-lib.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/base/mozilla-fxa-iframe.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/firefox/firstrun/firstrun_quantum.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_firstrun_quantum' %}
 {% endblock %}

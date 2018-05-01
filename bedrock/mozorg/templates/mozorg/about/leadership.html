@@ -10,13 +10,11 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="about-us"{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/newsletter/moznewsletter-subscribe.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/mozorg/leadership.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'about-leadership' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/mozorg/about-leadership.js') }}" charset="utf-8"></script>
+  {% javascript 'about-leadership' %}
 {% endblock %}
 
 {% block site_header_logo %}{% endblock %}

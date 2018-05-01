@@ -6,7 +6,7 @@
 {% block body_class %}sand{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/mozorg/itu.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'itu' %}
 {% endblock %}
 
 {% block content %}

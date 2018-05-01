@@ -16,10 +16,10 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="internet-health"{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/mozorg/internet-health/health-subpage.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'health-subpage' %}
 
   {% if switch('data-privacy-day-2017') %}
-    <link href="{{ static('css/mozorg/internet-health/privacy-day-egg.css') }}" rel="stylesheet" type="text/css" />
+    {% stylesheet 'privacy-day-egg' %}
   {% endif %}
 {% endblock %}
 
@@ -505,13 +505,8 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/hubs/sub-nav.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/base/mozilla-smoothscroll.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/mozorg/internet-health/health-subpage.js') }}" charset="utf-8"></script>
+  {% javascript 'internet-health-subpage' %}
   {% if switch('data-privacy-day-2017') %}
-    <script type="text/javascript" src="{{ static('js/libs/konami-code.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/mozorg/internet-health/privacy-day-egg.js') }}" charset="utf-8"></script>
+    {% javascript 'privacy-day-egg' %}
   {% endif %}
 {% endblock %}

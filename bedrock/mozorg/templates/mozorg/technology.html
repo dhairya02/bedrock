@@ -17,8 +17,7 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="technology"{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/base/mozilla-modal.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/mozorg/technology.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'technology' %}
 {% endblock %}
 
 {% block site_header %}
@@ -191,10 +190,6 @@
 
 {% block js %}
   {% if LANG.startswith('en-') %}
-    <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/hubs/sub-nav.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/mozorg/technology.js') }}" charset="utf-8"></script>
+    {% javascript 'technology' %}
   {% endif %}
 {% endblock %}

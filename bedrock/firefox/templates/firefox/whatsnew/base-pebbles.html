@@ -20,8 +20,7 @@
 
 {% block extrahead %}
   {% if switch('firefox-update-notification-modal', ['en-US']) %}
-    <link href="{{ static('css/base/mozilla-modal.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ static('css/base/notification-modal.css') }}" rel="stylesheet" type="text/css" />
+    {% stylesheet 'firefox-update-notification-firstrun-whatsnew' %}
   {% endif %}
 {% endblock %}
 
@@ -29,8 +28,6 @@
 {% block update_notification %}
   {% if switch('firefox-update-notification-modal', ['en-US']) %}
     {% include 'includes/firefox-update-instructions.html' %}
-    <script type="text/javascript" src="{{ static('js/base/mozilla-modal.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/base/mozilla-notification-banner.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/base/mozilla-notification-banner-firstrun-whatsnew-init.js') }}" charset="utf-8"></script>
+    {% javascript 'firefox-update-notification-firstrun-whatsnew' %}
   {% endif %}
 {% endblock %}

@@ -23,7 +23,7 @@
 {% block body_class %}fx-notes{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/firefox/releasenotes-firefox.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_releasenotes_firefox' %}
 {% endblock %}
 
 {# channel_name is for display purposes where needed.  #}
@@ -363,9 +363,7 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/firefox/releasenotes.js') }}" charset="utf-8"></script>
+  {% javascript 'releasenotes' %}
 {% endblock %}
 
 {% macro note_entry(note) %}

@@ -5,8 +5,7 @@
 {% block body_id %}firefox-releases-index{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/base/menu-resp.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/firefox/releases-index.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_releases_index' %}
 {% endblock %}
 
 {% block breadcrumbs %}

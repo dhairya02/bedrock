@@ -72,10 +72,7 @@
 {% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/base/mozilla-share-cta.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/base/menu-resp.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/newsletter/fxnewsletter-subscribe.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/firefox/all.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_all' %}
 {% endblock %}
 
 {% block site_header_logo %}
@@ -182,8 +179,6 @@
 {% block js %}
   {# searching with js only makes sense if we're displaying all #}
   {% if platform == 'desktop' and not query %}
-    <script type="text/javascript" src="{{ static('js/base/mozilla-share-cta.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/base/mozilla-pager.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/firefox/firefox-language-search.js') }}" charset="utf-8"></script>
+    {% javascript 'firefox_all' %}
   {% endif %}
 {% endblock %}

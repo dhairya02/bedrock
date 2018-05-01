@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/privacy/privacy-quantum.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'privacy_quantum' %}
 {% endblock %}
 
 {% block body_class %}privacy-policy{% endblock %}
@@ -75,5 +75,5 @@
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/privacy/privacy-quantum.js') }}" charset="utf-8"></script>
+  {% javascript 'privacy_quantum' %}
 {% endblock %}

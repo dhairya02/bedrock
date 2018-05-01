@@ -5,7 +5,7 @@
 {% extends "base-pebbles-basic.html" %}
 
 {% block page_css %}
-  <link href="{{ static('css/security/security.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'security' %}
 {% endblock %}
 
 {% set navigation_bar_security = [

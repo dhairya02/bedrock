@@ -5,13 +5,11 @@
 
 {% block page_css %}
   {{ super() }}
-  <link href="{{ static('css/security/hall-of-fame.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/base/mozilla-accordion.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'security-bug-bounty-hall-of-fame' %}
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/base/mozilla-accordion.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/base/mozilla-accordion-gatrack.js') }}" charset="utf-8"></script>
+  {% javascript 'accordion' %}
 {% endblock %}
 
 {% block article %}

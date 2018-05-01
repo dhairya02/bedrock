@@ -22,7 +22,7 @@
 {% block site_header %}{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/firefox/whatsnew/whatsnew-zh-tw.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'firefox_whatsnew_zh_tw' %}
 {% endblock %}
 
 {% block content %}
@@ -53,6 +53,5 @@
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/base/send-to-device.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/firefox/whatsnew/whatsnew.js') }}" charset="utf-8"></script>
+  {% javascript 'firefox_whatsnew' %}
 {% endblock %}

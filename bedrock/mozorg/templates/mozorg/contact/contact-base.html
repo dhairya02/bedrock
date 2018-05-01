@@ -11,8 +11,7 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="about-us"{% endblock %}
 
 {% block extrahead %}
-  <link href="{{ static('css/libs/magnific-popup.css') }}" rel="stylesheet" type="text/css" />
-  <link href="{{ static('css/mozorg/contact-spaces.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'contact-spaces' %}
 {% endblock %}
 
 {% block site_header %}
@@ -69,6 +68,5 @@
 {% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/libs/jquery.magnific-popup.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/mozorg/contact-spaces.js') }}" charset="utf-8"></script>
+  {% javascript 'contact-spaces' %}
 {% endblock %}

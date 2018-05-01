@@ -7,10 +7,7 @@
   <head>
     <meta charset="utf-8">{# Note: Must be within first 512 bytes of page #}
 
-    <script type="text/javascript" src="{{ static('js/base/site.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/base/dnt-helper.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/base/mozilla-cookie-helper.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/base/core-datalayer-page-id.js') }}" charset="utf-8"></script>
+    {% javascript 'site' %}
 
     <!--[if !lte IE 8]><!-->
     {% block experiments %}{% endblock %}
@@ -59,14 +56,14 @@
 
       {# Basic styles, only for IE8 and lower #}
       {% block old_ie_styles %}
-      <link href="{{ static('css/pebbles/base/oldIE.css') }}" rel="stylesheet" type="text/css" />
+      {% stylesheet 'oldIE-pebbles' %}
       {% endblock %}
     <![endif]-->
 
     <!--[if !lte IE 8]><!-->
     {# Global styles, hidden from IE8 and lower #}
     {% block site_css %}
-      <link href="{{ static('css/pebbles/global.css') }}" rel="stylesheet" type="text/css" />
+      {% stylesheet 'pebbles' %}
     {% endblock %}
 
     {# Page-specific styles, hidden from IE8 and lower #}
@@ -154,43 +151,23 @@
   </div>
 
   <!--[if IE 9]>
-    <script type="text/javascript" src="{{ static('js/libs/matchMedia.js') }}" charset="utf-8"></script>
-    <script type="text/javascript" src="{{ static('js/libs/matchMedia.addListener.js') }}" charset="utf-8"></script>
+    {% javascript 'matchmedia' %}
   <![endif]-->
 
     {% block site_js %}
       <!--[if !lte IE 8]><!-->
-        <script type="text/javascript" src="{{ static('js/libs/jquery-3.2.1.min.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/libs/spin.min.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/mozilla-utils.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/newsletter/form.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/mozilla-client.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/mozilla-image-helper.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/nav-main-resp.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/class-list-polyfill.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/mozilla-global-nav.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/base-page-init.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/core-datalayer.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/core-datalayer-init.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/search-params.js') }}" charset="utf-8"></script>
+        {% javascript 'common' %}
       <!--<![endif]-->
 
       <!--[if lte IE 8]>
-        <script type="text/javascript" src="{{ static('js/libs/jquery-1.11.3.min.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/ie8/mozilla-utils-ie8.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/mozilla-client.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/ie8/base-page-init-ie8.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/core-datalayer.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/core-datalayer-init.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/search-params.js') }}" charset="utf-8"></script>
+        {% javascript 'common-ie8' %}
       <![endif]-->
     {% endblock %}
 
     {# Bug 1279291 #}
     {% block stub_attribution %}
       {% if settings.STUB_ATTRIBUTION_RATE %}
-        <script type="text/javascript" src="{{ static('js/base/stub-attribution.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/stub-attribution-init.js') }}" charset="utf-8"></script>
+        {% javascript 'stub-attribution' %}
       {% endif %}
     {% endblock %}
 
@@ -200,8 +177,7 @@
     {# Bug 1381776 #}
     {% block update_notification %}
       {% if switch('firefox-update-notification', ['en-US']) %}
-        <script type="text/javascript" src="{{ static('js/base/mozilla-notification-banner.js') }}" charset="utf-8"></script>
-        <script type="text/javascript" src="{{ static('js/base/mozilla-notification-banner-init.js') }}" charset="utf-8"></script>
+        {% javascript 'firefox-update-notification' %}
       {% endif %}
     {% endblock %}
 

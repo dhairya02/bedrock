@@ -20,7 +20,7 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="internet-health"{% endblock %}
 
 {% block page_css %}
-  <link href="{{ static('css/mozorg/internet-health/index.css') }}" rel="stylesheet" type="text/css" />
+  {% stylesheet 'internet-health-hub' %}
 {% endblock %}
 
 {% block site_header %}
@@ -208,7 +208,5 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/libs/jquery.waypoints-sticky.min.js') }}" charset="utf-8"></script>
-  <script type="text/javascript" src="{{ static('js/hubs/sub-nav.js') }}" charset="utf-8"></script>
+  {% javascript 'internet-health-hub' %}
 {% endblock %}
