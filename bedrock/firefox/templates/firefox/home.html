@@ -18,7 +18,7 @@
 {% block page_desc %}{{ _('Responsive engine, less memory usage and packed with features. Download for desktop now.') }}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox-home' %}
+  <link href="{{ static('css/BUNDLES/firefox-home.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block body_id %}firefox-home{% endblock %}
@@ -410,5 +410,5 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'firefox-home' %}
+  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox-home.js') }}" charset="utf-8"></script>
 {% endblock %}

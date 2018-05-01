@@ -35,7 +35,7 @@
 {% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'home-2018' %}
+  <link href="{{ static('css/BUNDLES/home-2018.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header %}
@@ -415,5 +415,5 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'home' %}
+  <script type="text/javascript" src="{{ static('js/BUNDLES/home.js') }}" charset="utf-8"></script>
 {% endblock %}

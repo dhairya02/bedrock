@@ -8,7 +8,7 @@
 {% block body_id %}csrf-failure{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'csrf-failure' %}
+  <link href="{{ static('css/BUNDLES/csrf-failure.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block content %}

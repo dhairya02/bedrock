@@ -44,7 +44,7 @@
 {% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'manifesto' %}
+  <link href="{{ static('css/BUNDLES/manifesto.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header_logo %}{% endblock %}
@@ -399,7 +399,7 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'manifesto' %}
+  <script type="text/javascript" src="{{ static('js/BUNDLES/manifesto.js') }}" charset="utf-8"></script>
 {% endblock %}
 
   {#- End the redesigned landing page -#}

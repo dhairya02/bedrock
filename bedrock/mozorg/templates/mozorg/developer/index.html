@@ -16,7 +16,7 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="technology"{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'developer-hub' %}
+  <link href="{{ static('css/BUNDLES/developer-hub.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header %}
@@ -422,5 +422,5 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'developer-hub' %}
+  <script type="text/javascript" src="{{ static('js/BUNDLES/developer-hub.js') }}" charset="utf-8"></script>
 {% endblock %}

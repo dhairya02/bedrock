@@ -20,7 +20,7 @@
 {% block site_header %}{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox-whatsnew-rocket' %}
+  <link href="{{ static('css/BUNDLES/firefox-whatsnew-rocket.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 
@@ -52,5 +52,5 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'firefox_whatsnew' %}
+  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_whatsnew.js') }}" charset="utf-8"></script>
 {% endblock %}

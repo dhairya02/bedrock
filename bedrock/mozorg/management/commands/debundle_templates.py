@@ -17,6 +17,7 @@ BUNDLES = {
 }
 STYLE_TEMPLATE = '<link href="{{ static(\'%s\') }}" rel="stylesheet" type="text/css" />'
 JS_TEMPLATE = '<script type="text/javascript" src="{{ static(\'%s\') }}" charset="utf-8"></script>'
+BUNDLE_TEMPLATE = '{0}/BUNDLES/{1}.{0}'
 
 
 def get_leading_space(line):
@@ -37,6 +38,7 @@ class Command(BaseCommand):
             print('===============')
             print(template)
             lines = []
+            modified = False
             with template.open('r') as tf:
                 for line in tf:
                     match = PIPELINE_RE.search(line)
@@ -44,15 +46,16 @@ class Command(BaseCommand):
                         print(line)
                         mtype, bundle = match.groups()
                         indent = get_leading_space(line)
-                        bundle_files = BUNDLES[mtype][bundle]['source_filenames']
-                        line_tpl = STYLE_TEMPLATE if mtype == 'stylesheet' else JS_TEMPLATE
-                        for bf in bundle_files:
-                            if bf.endswith('.scss') or bf.endswith('.less'):
-                                bf = bf[:-5] + '.css'
-                            lines.append(indent + line_tpl % bf + '\n')
-                            print(lines[-1])
+                        if mtype == 'stylesheet':
+                            lines.append(indent + STYLE_TEMPLATE % BUNDLE_TEMPLATE.format('css', bundle) + '\n')
+                        else:
+                            lines.append(indent + JS_TEMPLATE % BUNDLE_TEMPLATE.format('js', bundle) + '\n')
+
+                        modified = True
+                        print(lines[-1])
                     else:
                         lines.append(line)
 
-            with template.open('w') as tf:
-                tf.writelines(lines)
+            if modified:
+                with template.open('w') as tf:
+                    tf.writelines(lines)

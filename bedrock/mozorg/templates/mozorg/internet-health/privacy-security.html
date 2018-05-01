@@ -16,10 +16,10 @@
 {% block body_attrs %}{{ super() }} data-global-nav-current-link="internet-health"{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'health-subpage' %}
+  <link href="{{ static('css/BUNDLES/health-subpage.css') }}" rel="stylesheet" type="text/css" />
 
   {% if switch('data-privacy-day-2017') %}
-    {% stylesheet 'privacy-day-egg' %}
+    <link href="{{ static('css/BUNDLES/privacy-day-egg.css') }}" rel="stylesheet" type="text/css" />
   {% endif %}
 {% endblock %}
 
@@ -505,8 +505,8 @@
 {% block email_form %}{% endblock %}
 
 {% block js %}
-  {% javascript 'internet-health-subpage' %}
+  <script type="text/javascript" src="{{ static('js/BUNDLES/internet-health-subpage.js') }}" charset="utf-8"></script>
   {% if switch('data-privacy-day-2017') %}
-    {% javascript 'privacy-day-egg' %}
+    <script type="text/javascript" src="{{ static('js/BUNDLES/privacy-day-egg.js') }}" charset="utf-8"></script>
   {% endif %}
 {% endblock %}

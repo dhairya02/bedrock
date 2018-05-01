@@ -8,7 +8,7 @@
 {% block body_id %}annual-2012{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'annual_2012' %}
+  <link href="{{ static('css/BUNDLES/annual_2012.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block site_header %}
@@ -229,5 +229,5 @@
 {% endblock %}
 
 {% block js %}
-  {% javascript 'annual_2012' %}
+  <script type="text/javascript" src="{{ static('js/BUNDLES/annual_2012.js') }}" charset="utf-8"></script>
 {% endblock %}

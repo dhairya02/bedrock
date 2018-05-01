@@ -14,11 +14,11 @@
 {% block body_class %}sky sad{% endblock %}
 
 {% block page_css %}
-  {% stylesheet 'firefox_feedback' %}
+  <link href="{{ static('css/BUNDLES/firefox_feedback.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block js %}
-  {% javascript 'firefox_feedback' %}
+  <script type="text/javascript" src="{{ static('js/BUNDLES/firefox_feedback.js') }}" charset="utf-8"></script>
 {% endblock %}
 
 {% block site_header_nav %}{% endblock %}

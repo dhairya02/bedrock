@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">{# Note: Must be within first 512 bytes of page #}
 
-    {% javascript 'site' %}
+    <script type="text/javascript" src="{{ static('js/BUNDLES/site.js') }}" charset="utf-8"></script>
 
     <!--[if !lte IE 8]><!-->
     {% block experiments %}{% endblock %}
@@ -56,14 +56,14 @@
 
       {# Basic styles, only for IE8 and lower #}
       {% block old_ie_styles %}
-      {% stylesheet 'oldIE-pebbles' %}
+      <link href="{{ static('css/BUNDLES/oldIE-pebbles.css') }}" rel="stylesheet" type="text/css" />
       {% endblock %}
     <![endif]-->
 
     <!--[if !lte IE 8]><!-->
     {# Global styles, hidden from IE8 and lower #}
     {% block site_css %}
-      {% stylesheet 'pebbles' %}
+      <link href="{{ static('css/BUNDLES/pebbles.css') }}" rel="stylesheet" type="text/css" />
     {% endblock %}
 
     {# Page-specific styles, hidden from IE8 and lower #}
@@ -151,23 +151,23 @@
   </div>
 
   <!--[if IE 9]>
-    {% javascript 'matchmedia' %}
+    <script type="text/javascript" src="{{ static('js/BUNDLES/matchmedia.js') }}" charset="utf-8"></script>
   <![endif]-->
 
     {% block site_js %}
       <!--[if !lte IE 8]><!-->
-        {% javascript 'common' %}
+        <script type="text/javascript" src="{{ static('js/BUNDLES/common.js') }}" charset="utf-8"></script>
       <!--<![endif]-->
 
       <!--[if lte IE 8]>
-        {% javascript 'common-ie8' %}
+        <script type="text/javascript" src="{{ static('js/BUNDLES/common-ie8.js') }}" charset="utf-8"></script>
       <![endif]-->
     {% endblock %}
 
     {# Bug 1279291 #}
     {% block stub_attribution %}
       {% if settings.STUB_ATTRIBUTION_RATE %}
-        {% javascript 'stub-attribution' %}
+        <script type="text/javascript" src="{{ static('js/BUNDLES/stub-attribution.js') }}" charset="utf-8"></script>
       {% endif %}
     {% endblock %}
 
@@ -177,7 +177,7 @@
     {# Bug 1381776 #}
     {% block update_notification %}
       {% if switch('firefox-update-notification', ['en-US']) %}
-        {% javascript 'firefox-update-notification' %}
+        <script type="text/javascript" src="{{ static('js/BUNDLES/firefox-update-notification.js') }}" charset="utf-8"></script>
       {% endif %}
     {% endblock %}
 
