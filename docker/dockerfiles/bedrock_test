@@ -1,4 +1,4 @@
-FROM mozorg/bedrock_code:${GIT_COMMIT}
+FROM mozorg/bedrock:latest
 
 CMD ["./bin/run-tests.sh"]
 USER root
