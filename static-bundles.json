@@ -2,9 +2,10 @@
   "css": [
     {
       "files": [
-        "css/firefox/features/sync.scss"
+        "css/base/mozilla-modal.less",
+        "css/mozorg/developer/index.scss"
       ],
-      "name": "firefox-features-sync"
+      "name": "developer-hub"
     },
     {
       "files": [
@@ -105,10 +106,9 @@
     },
     {
       "files": [
-        "css/base/mozilla-modal.less",
-        "css/mozorg/developer/index.scss"
+        "css/mozorg/about-base.less"
       ],
-      "name": "developer-hub"
+      "name": "about-base-resp"
     },
     {
       "files": [
@@ -229,6 +229,12 @@
     },
     {
       "files": [
+        "css/firefox/features/sync.scss"
+      ],
+      "name": "firefox-features-sync"
+    },
+    {
+      "files": [
         "css/newsletter/newsletter-developer.scss"
       ],
       "name": "newsletter-developer"
@@ -302,12 +308,6 @@
         "css/foundation/annual2011.less"
       ],
       "name": "annual_2011"
-    },
-    {
-      "files": [
-        "css/mozorg/about-base.less"
-      ],
-      "name": "about-base"
     },
     {
       "files": [
