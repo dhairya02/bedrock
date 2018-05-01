@@ -15,8 +15,8 @@ BUNDLES = {
     'javascript': PIPELINE_JS,
     'stylesheet': PIPELINE_CSS,
 }
-STYLE_TEMPLATE = '<link href="{{ css_bundle(\'%s\') }}" rel="stylesheet" type="text/css" />'
-JS_TEMPLATE = '<script type="text/javascript" src="{{ js_bundle(\'%s\') }}" charset="utf-8"></script>'
+STYLE_TEMPLATE = "{{ css_bundle('%s') }}"
+JS_TEMPLATE = "{{ js_bundle('%s') }}"
 
 
 def get_leading_space(line):

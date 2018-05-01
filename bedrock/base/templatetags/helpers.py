@@ -14,6 +14,10 @@ from bedrock.base import waffle
 from bedrock.utils import expand_locale_groups
 
 
+CSS_TEMPLATE = '<link href="%s" rel="stylesheet" type="text/css" />'
+JS_TEMPLATE = '<script type="text/javascript" src="%s" charset="utf-8"></script>'
+
+
 @library.global_function
 def send_to_device_sms_countries(message_set):
     try:
@@ -116,13 +120,15 @@ def static(path):
 @library.global_function
 def js_bundle(name):
     path = 'js/BUNDLES/{}.js'.format(name)
-    return staticfiles_storage.url(path)
+    path = staticfiles_storage.url(path)
+    return jinja2.Markup(JS_TEMPLATE % path)
 
 
 @library.global_function
 def css_bundle(name):
     path = 'css/BUNDLES/{}.css'.format(name)
-    return staticfiles_storage.url(path)
+    path = staticfiles_storage.url(path)
+    return jinja2.Markup(CSS_TEMPLATE % path)
 
 
 @library.global_function
