@@ -1,10 +1,14 @@
 version: '3.4'
 services:
-  assets:
-    image: mozorg/bedrock_assets:latest
-    command: sh -c "gulp clean && gulp watch"
+  web:
+    build:
+      context: .
+      dockerfile: docker/dockerfiles/bedrock_assets_dev
+      cache_from:
+        - mozorg/bedrock_assets:latest
+    image: mozorg/bedrock_assets_dev:latest
     depends_on:
-      - web
+      - app
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -12,13 +16,44 @@ services:
       - ./media/:/app/media:cached
       - ./bedrock/:/app/bedrock:cached
     environment:
-      BS_PROXY_URL: "web:8000"
+      BS_PROXY_URL: "app:8000"
       BS_OPEN_BROWSER: "false"
-  web:
-    image: mozorg/bedrock:latest
-    command: ./manage.py runserver 0.0.0.0:8000
+  app:
+    build:
+      context: .
+      dockerfile: docker/dockerfiles/bedrock_test
+      cache_from:
+        - mozorg/bedrock_test:latest
+    image: mozorg/bedrock_test:latest
+    command: python manage.py runserver 0.0.0.0:8000
     env_file: .env
     ports:
       - "8000:8000"
     volumes:
       - ./bedrock/:/app/bedrock:cached
+      - ./media/:/app/media:cached
+      - ./root_files/:/app/root_files:cached
+      - ./lib/:/app/lib:cached
+      - ./bin/:/app/bin:cached
+      - ./etc/:/app/etc:cached
+      - ./scripts/:/app/scripts:cached
+      - ./wsgi/:/app/wsgi:cached
+      - ./docker/:/app/docker:cached
+      - ./vendor-local/:/app/vendor-local:cached
+  test:
+    image: mozorg/bedrock_test:latest
+    env_file: .env
+    depends_on:
+      - app
+    volumes:
+      - ./bedrock/:/app/bedrock:cached
+      - ./media/:/app/media:cached
+      - ./root_files/:/app/root_files:cached
+      - ./lib/:/app/lib:cached
+      - ./bin/:/app/bin:cached
+      - ./etc/:/app/etc:cached
+      - ./scripts/:/app/scripts:cached
+      - ./wsgi/:/app/wsgi:cached
+      - ./docker/:/app/docker:cached
+      - ./vendor-local/:/app/vendor-local:cached
+      - ./test/:/app/test:cached

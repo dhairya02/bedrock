@@ -1,0 +1,4 @@
+FROM mozorg/bedrock_assets:latest
+
+RUN gulp clean
+CMD ["gulp"]
