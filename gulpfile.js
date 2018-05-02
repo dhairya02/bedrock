@@ -78,21 +78,21 @@ gulp.task('css:compile', ['sass', 'less'], function() {
     }));
 });
 
-gulp.task('js:compile', function() {
+gulp.task('js:compile', ['assets'], function() {
     return merge(staticBundles.js.map(function(bundle){
         var bundleFilename = `js/BUNDLES/${bundle.name}.js`;
-        return gulp.src(bundle.files, {base: 'media', 'cwd': 'media'})
+        return gulp.src(bundle.files, {base: 'static_build', cwd: 'static_build'})
             .pipe(gulpif(!production, sourcemaps.init()))
             .pipe(concat(bundleFilename))
             .pipe(gulpif(!production, sourcemaps.write({
-                'includeContent': true
+                'includeContent': false
             })))
             .pipe(gulp.dest('static_build'));
     }));
 });
 
-gulp.task('sass', function() {
-    return gulp.src(allBundleFiles('css', '.scss'), {base: 'media', cwd: 'media'})
+gulp.task('sass', ['assets'], function() {
+    return gulp.src(allBundleFiles('css', '.scss'), {base: 'static_build', cwd: 'static_build'})
         .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(sass({
             sourceComments: !production,
@@ -101,12 +101,12 @@ gulp.task('sass', function() {
         // we don't serve the source files
         // so include scss content inside the sourcemaps
         .pipe(gulpif(!production, sourcemaps.write({
-            'includeContent': true
+            'includeContent': false
         })))
         .pipe(gulp.dest('static_build'));
 });
 
-gulp.task('less', function() {
+gulp.task('less', ['assets'], function() {
     return gulp.src(allBundleFiles('css', '.less'), {base: 'media', cwd: 'media'})
         .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(less({inlineJavaScript: true, ieCompat: true}).on('error', handleError('LESS')))
@@ -162,12 +162,12 @@ gulp.task('clean', () => {
 gulp.task('assets', () => {
     return gulp.src([
         'media/**/*',
-        '!media/css/**/*.{scss,less}',
-        '!media/js/**/*.js'
-    ], {base: 'media'}).pipe(gulp.dest('static_build'));
+        'node_modules/@mozilla-protocol/core/**/*',
+        '!node_modules/@mozilla-protocol/core/*'
+    ]).pipe(gulp.dest('static_build'));
 });
 
-gulp.task('browser-sync', () => {
+gulp.task('browser-sync', ['js:compile', 'css:compile'], () => {
     var proxyURL = process.env.BS_PROXY_URL || 'localhost:8000';
     var openBrowser = !(process.env.BS_OPEN_BROWSER === 'false');
     browserSync({
@@ -180,6 +180,7 @@ gulp.task('browser-sync', () => {
     });
 });
 
+gulp.task('reload-other', ['assets'], browserSync.reload);
 gulp.task('reload-css', ['css:compile'], browserSync.reload);
 gulp.task('reload-js', ['js:compile'], browserSync.reload);
 gulp.task('reload', browserSync.reload);
@@ -187,28 +188,22 @@ gulp.task('reload', browserSync.reload);
 // --------------------------
 // DEV/WATCH TASK
 // --------------------------
-gulp.task('watch', ['assets', 'js:compile', 'css:compile', 'browser-sync'], function () {
-    gulp.start('media:watch');
+gulp.task('watch', ['browser-sync'], function () {
+    gulp.watch([
+        'media/**/*',
+        '!media/css/**/*',
+        '!media/js/**/*'
+    ], ['reload-other']);
 
     // --------------------------
-    // watch:less
+    // watch:css, less, and sass
     // --------------------------
-    gulp.watch('media/css/**/*.less', ['css:compile']);
-
-    // --------------------------
-    // watch:sass
-    // --------------------------
-    gulp.watch('media/css/**/*.scss', ['css:compile']);
+    gulp.watch('media/css/**/*', ['reload-css']);
 
     // --------------------------
     // watch:js
     // --------------------------
     gulp.watch('media/js/**/*.js', ['js:lint', 'reload-js']);
-
-    // --------------------------
-    // watch:css
-    // --------------------------
-    gulp.watch('static_build/css/**/*.css', ['css:lint', 'reload']);
 
     // --------------------------
     // watch:html

@@ -2,7 +2,7 @@ version: '3.4'
 services:
   assets:
     image: mozorg/bedrock_assets:latest
-    command: npm run docker-start
+    command: sh -c "gulp clean && gulp watch"
     depends_on:
       - web
     ports:
@@ -21,4 +21,4 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./:/app:cached
+      - ./bedrock/:/app/bedrock:cached
