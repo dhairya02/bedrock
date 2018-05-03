@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@mozilla-protocol/core": "^0.1.2",
+    "ansi-colors": "^1.1.0",
     "clean-css-cli": "4.0.5",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
@@ -17,7 +18,6 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-stylelint": "^3.9.0",
     "gulp-uglify": "^3.0.0",
-    "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.6",
     "merge-stream": "^1.0.1",
     "yargs": "^11.0.0"

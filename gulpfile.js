@@ -5,7 +5,8 @@
 /* global __dirname, require, process */
 
 const gulp = require('gulp');
-const gutil = require('gulp-util');
+const log = require('fancy-log');
+const colors = require('ansi-colors');
 const gulpif = require('gulp-if');
 const sass = require('gulp-sass');
 const less = require('gulp-less');
@@ -54,7 +55,7 @@ const allBundleFiles = (fileType, fileExt) => {
 
 const handleError = task => {
     return err => {
-        gutil.log(gutil.colors.bgRed(task + ' error:'), gutil.colors.red(err));
+        log.warn(colors.bold(colors.red(`[ERROR] ${task}:`)), colors.red(err));
     };
 };
 
@@ -210,7 +211,7 @@ gulp.task('watch', ['browser-sync'], () => {
     // --------------------------
     gulp.watch('bedrock/*/templates/**/*.html', ['reload']);
 
-    gutil.log(gutil.colors.bgGreen('Watching for changes...'));
+    log.info(colors.bgGreen('Watching for changes...'));
 });
 
 gulp.task('build', ['assets', 'js:minify', 'css:minify']);
