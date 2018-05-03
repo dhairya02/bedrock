@@ -17,7 +17,6 @@ const sourcemaps = require('gulp-sourcemaps');
 const del = require('del');
 const karma = require('karma');
 const eslint = require('gulp-eslint');
-const watch = require('gulp-watch');
 const gulpStylelint = require('gulp-stylelint');
 const argv = require('yargs').argv;
 const browserSync = require('browser-sync');
@@ -59,39 +58,27 @@ const handleError = task => {
     };
 };
 
-gulp.task('media:watch', () => {
-    return watch(['media/**/*', '!media/css/**/*.{scss,less}'], {base: 'media', verbose: true})
-        .pipe(gulp.dest('static_build'));
+/**
+ * Delete the static_build directory and start fresh.
+ */
+gulp.task('clean', () => {
+    return del(['static_build']);
 });
 
-gulp.task('css:compile', ['sass', 'less'], () => {
-    return merge(staticBundles.css.map(bundle => {
-        let bundleFilename = `css/BUNDLES/${bundle.name}.css`;
-        let cssFiles = bundle.files.map(fileName => {
-            if (!fileName.endsWith('.css')) {
-                return fileName.replace(/\.(less|scss)$/i, '.css');
-            }
-            return fileName;
-        });
-        return gulp.src(cssFiles, {base: 'static_build', 'cwd': 'static_build'})
-            .pipe(concat(bundleFilename))
-            .pipe(gulp.dest('static_build'));
-    }));
+/**
+ * Copy assets from various sources into the static_build dir for processing.
+ */
+gulp.task('assets', () => {
+    return gulp.src([
+        'media/**/*',
+        'node_modules/@mozilla-protocol/core/**/*',
+        '!node_modules/@mozilla-protocol/core/*'
+    ]).pipe(gulp.dest('static_build'));
 });
 
-gulp.task('js:compile', ['assets'], () => {
-    return merge(staticBundles.js.map(bundle => {
-        let bundleFilename = `js/BUNDLES/${bundle.name}.js`;
-        return gulp.src(bundle.files, {base: 'static_build', cwd: 'static_build'})
-            .pipe(gulpif(!production, sourcemaps.init()))
-            .pipe(concat(bundleFilename))
-            .pipe(gulpif(!production, sourcemaps.write({
-                'includeContent': false
-            })))
-            .pipe(gulp.dest('static_build'));
-    }));
-});
-
+/**
+ * Find all SASS files from bundles in the static_build directory and compile them.
+ */
 gulp.task('sass', ['assets'], () => {
     return gulp.src(allBundleFiles('css', '.scss'), {base: 'static_build', cwd: 'static_build'})
         .pipe(gulpif(!production, sourcemaps.init()))
@@ -107,6 +94,9 @@ gulp.task('sass', ['assets'], () => {
         .pipe(gulp.dest('static_build'));
 });
 
+/**
+ * Find all LESS files from bundles in the static_build directory and compile them.
+ */
 gulp.task('less', ['assets'], () => {
     return gulp.src(allBundleFiles('css', '.less'), {base: 'media', cwd: 'media'})
         .pipe(gulpif(!production, sourcemaps.init()))
@@ -119,18 +109,63 @@ gulp.task('less', ['assets'], () => {
         .pipe(gulp.dest('static_build'));
 });
 
+/**
+ * Combine the CSS files after SASS/LESS compilation into bundles
+ * based on definitions in the `static-bundles.json` file.
+ */
+gulp.task('css:compile', ['sass', 'less'], () => {
+    return merge(staticBundles.css.map(bundle => {
+        let bundleFilename = `css/BUNDLES/${bundle.name}.css`;
+        let cssFiles = bundle.files.map(fileName => {
+            if (!fileName.endsWith('.css')) {
+                return fileName.replace(/\.(less|scss)$/i, '.css');
+            }
+            return fileName;
+        });
+        return gulp.src(cssFiles, {base: 'static_build', 'cwd': 'static_build'})
+            .pipe(concat(bundleFilename))
+            .pipe(gulp.dest('static_build'));
+    }));
+});
+
+/**
+ * Combine the JS files into bundles
+ * based on definitions in the `static-bundles.json` file.
+ */
+gulp.task('js:compile', ['assets'], () => {
+    return merge(staticBundles.js.map(bundle => {
+        let bundleFilename = `js/BUNDLES/${bundle.name}.js`;
+        return gulp.src(bundle.files, {base: 'static_build', cwd: 'static_build'})
+            .pipe(gulpif(!production, sourcemaps.init()))
+            .pipe(concat(bundleFilename))
+            .pipe(gulpif(!production, sourcemaps.write({
+                'includeContent': false
+            })))
+            .pipe(gulp.dest('static_build'));
+    }));
+});
+
+/**
+ * Minify all of the CSS files after compilation.
+ */
 gulp.task('css:minify', ['css:compile'], () => {
     return gulp.src('static_build/css/**/*.css', {base: 'static_build'})
         .pipe(cleanCSS().on('error', handleError('CLEANCSS')))
         .pipe(gulp.dest('static_build'));
 });
 
+/**
+ * Minify all of the JS files after compilation.
+ */
 gulp.task('js:minify', ['js:compile'], () => {
     return gulp.src('static_build/js/**/*.js', {base: 'static_build'})
         .pipe(uglify().on('error', handleError('UGLIFY')))
         .pipe(gulp.dest('static_build'));
 });
 
+/**
+ * Run the JS test suite.
+ */
 gulp.task('js:test', done => {
     new karma.Server({
         configFile: `${__dirname}/tests/unit/karma.conf.js`,
@@ -138,6 +173,9 @@ gulp.task('js:test', done => {
     }, done).start();
 });
 
+/**
+ * Run eslint style check on all JS.
+ */
 gulp.task('js:lint', () => {
     return gulp.src(lintPathsJS)
         .pipe(eslint())
@@ -145,7 +183,9 @@ gulp.task('js:lint', () => {
         .pipe(eslint.failAfterError());
 });
 
-
+/**
+ * Run CSS style check on all CSS.
+ */
 gulp.task('css:lint', () => {
     return gulp.src(lintPathsCSS)
         .pipe(gulpStylelint({
@@ -156,18 +196,9 @@ gulp.task('css:lint', () => {
         }));
 });
 
-gulp.task('clean', () => {
-    return del(['static_build']);
-});
-
-gulp.task('assets', () => {
-    return gulp.src([
-        'media/**/*',
-        'node_modules/@mozilla-protocol/core/**/*',
-        '!node_modules/@mozilla-protocol/core/*'
-    ]).pipe(gulp.dest('static_build'));
-});
-
+/**
+ * Start the browser-sync daemon for local development.
+ */
 gulp.task('browser-sync', ['js:compile', 'css:compile'], () => {
     const proxyURL = process.env.BS_PROXY_URL || 'localhost:8000';
     const openBrowser = !(process.env.BS_OPEN_BROWSER === 'false');
@@ -181,6 +212,9 @@ gulp.task('browser-sync', ['js:compile', 'css:compile'], () => {
     });
 });
 
+/**
+ * Reload tasks used by `gulp watch`.
+ */
 gulp.task('reload-other', ['assets'], browserSync.reload);
 gulp.task('reload-css', ['css:compile'], browserSync.reload);
 gulp.task('reload-js', ['js:compile'], browserSync.reload);
@@ -214,6 +248,10 @@ gulp.task('watch', ['browser-sync'], () => {
     log.info(colors.bgGreen('Watching for changes...'));
 });
 
+/**
+ * Build all assets in prep for production.
+ * Pass the `--production` flag to turn off sourcemaps.
+ */
 gulp.task('build', ['assets', 'js:minify', 'css:minify']);
 
 gulp.task('default', ['watch']);
