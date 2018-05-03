@@ -14,6 +14,12 @@
     },
     {
       "files": [
+        "css/firefox/accounts-features.scss"
+      ],
+      "name": "firefox_accounts_features"
+    },
+    {
+      "files": [
         "css/firefox/whatsnew/whatsnew-nightly.scss"
       ],
       "name": "nightly_whatsnew"
@@ -816,17 +822,18 @@
     },
     {
       "files": [
-        "js/base/optimizely-snippet.js"
-      ],
-      "name": "optimizely-snippet"
-    },
-    {
-      "files": [
         "js/base/mozilla-share-cta.js",
         "js/libs/snap.svg.js",
         "js/teach/smarton-landing.js"
       ],
       "name": "smarton-landing"
+    },
+    {
+      "files": [
+        "js/base/mozilla-traffic-cop.js",
+        "js/firefox/accounts-features-experiment.js"
+      ],
+      "name": "firefox_accounts_features_experiment"
     },
     {
       "files": [
