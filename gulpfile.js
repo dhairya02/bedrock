@@ -98,7 +98,7 @@ gulp.task('sass', ['assets'], () => {
  * Find all LESS files from bundles in the static_build directory and compile them.
  */
 gulp.task('less', ['assets'], () => {
-    return gulp.src(allBundleFiles('css', '.less'), {base: 'media', cwd: 'media'})
+    return gulp.src(allBundleFiles('css', '.less'), {base: 'static_build', cwd: 'static_build'})
         .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(less({inlineJavaScript: true, ieCompat: true}).on('error', handleError('LESS')))
         // we don't serve the source files
@@ -245,7 +245,7 @@ gulp.task('watch', ['browser-sync'], () => {
     // --------------------------
     gulp.watch('bedrock/*/templates/**/*.html', ['reload']);
 
-    log.info(colors.bgGreen('Watching for changes...'));
+    log.info(colors.bggreen('Watching for changes...'));
 });
 
 /**
