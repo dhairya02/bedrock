@@ -38,12 +38,12 @@ const lintPathsCSS = [
 ];
 
 // gulp build --production
-var production = !!argv.production;
+const production = !!argv.production;
 
-var allBundleFiles = function (fileType, fileExt) {
+const allBundleFiles = (fileType, fileExt) => {
     let allFiles = [];
-    staticBundles[fileType].forEach(function(bundle){
-        bundle.files.forEach(function(bFile){
+    staticBundles[fileType].forEach(bundle => {
+        bundle.files.forEach(bFile => {
             if (bFile.endsWith(fileExt)) {
                 allFiles.push(bFile);
             }
@@ -52,8 +52,8 @@ var allBundleFiles = function (fileType, fileExt) {
     return allFiles;
 };
 
-var handleError = function (task) {
-    return function (err) {
+const handleError = task => {
+    return err => {
         gutil.log(gutil.colors.bgRed(task + ' error:'), gutil.colors.red(err));
     };
 };
@@ -63,10 +63,10 @@ gulp.task('media:watch', () => {
         .pipe(gulp.dest('static_build'));
 });
 
-gulp.task('css:compile', ['sass', 'less'], function() {
-    return merge(staticBundles.css.map(function(bundle){
-        var bundleFilename = `css/BUNDLES/${bundle.name}.css`;
-        var cssFiles = bundle.files.map(function(fileName){
+gulp.task('css:compile', ['sass', 'less'], () => {
+    return merge(staticBundles.css.map(bundle => {
+        let bundleFilename = `css/BUNDLES/${bundle.name}.css`;
+        let cssFiles = bundle.files.map(fileName => {
             if (!fileName.endsWith('.css')) {
                 return fileName.replace(/\.(less|scss)$/i, '.css');
             }
@@ -78,9 +78,9 @@ gulp.task('css:compile', ['sass', 'less'], function() {
     }));
 });
 
-gulp.task('js:compile', ['assets'], function() {
-    return merge(staticBundles.js.map(function(bundle){
-        var bundleFilename = `js/BUNDLES/${bundle.name}.js`;
+gulp.task('js:compile', ['assets'], () => {
+    return merge(staticBundles.js.map(bundle => {
+        let bundleFilename = `js/BUNDLES/${bundle.name}.js`;
         return gulp.src(bundle.files, {base: 'static_build', cwd: 'static_build'})
             .pipe(gulpif(!production, sourcemaps.init()))
             .pipe(concat(bundleFilename))
@@ -91,7 +91,7 @@ gulp.task('js:compile', ['assets'], function() {
     }));
 });
 
-gulp.task('sass', ['assets'], function() {
+gulp.task('sass', ['assets'], () => {
     return gulp.src(allBundleFiles('css', '.scss'), {base: 'static_build', cwd: 'static_build'})
         .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(sass({
@@ -106,7 +106,7 @@ gulp.task('sass', ['assets'], function() {
         .pipe(gulp.dest('static_build'));
 });
 
-gulp.task('less', ['assets'], function() {
+gulp.task('less', ['assets'], () => {
     return gulp.src(allBundleFiles('css', '.less'), {base: 'media', cwd: 'media'})
         .pipe(gulpif(!production, sourcemaps.init()))
         .pipe(less({inlineJavaScript: true, ieCompat: true}).on('error', handleError('LESS')))
@@ -168,8 +168,8 @@ gulp.task('assets', () => {
 });
 
 gulp.task('browser-sync', ['js:compile', 'css:compile'], () => {
-    var proxyURL = process.env.BS_PROXY_URL || 'localhost:8000';
-    var openBrowser = !(process.env.BS_OPEN_BROWSER === 'false');
+    const proxyURL = process.env.BS_PROXY_URL || 'localhost:8000';
+    const openBrowser = !(process.env.BS_OPEN_BROWSER === 'false');
     browserSync({
         proxy: proxyURL,
         open: openBrowser,
@@ -188,7 +188,7 @@ gulp.task('reload', browserSync.reload);
 // --------------------------
 // DEV/WATCH TASK
 // --------------------------
-gulp.task('watch', ['browser-sync'], function () {
+gulp.task('watch', ['browser-sync'], () => {
     gulp.watch([
         'media/**/*',
         '!media/css/**/*',
