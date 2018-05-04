@@ -29,10 +29,13 @@ Docker Installation
     If not please do that now or skip to the ``Local Installation`` section.
 
 This is the simplest way to get started developing for bedrock. If you're on Linux or Mac (and possibly Windows 10 with the
-Linux subsystem) you can run a script that will pull our production docker images and use those to build developer ones and
-start the servers you need to serve bedrock locally::
+Linux subsystem) you can run a script that will pull our production docker images and use those to build developer ones::
 
-    $ bin/docker-start.sh
+    $ bin/docker-bootstrap.sh
+
+Then you can start the server with ``docker-compose``::
+
+    $ docker-compose up web
 
 You should see a number of things happeneing, but when it's done it will output something saying that the server is running
 at `localhost:3000 <http://localhost:3000/>`_. Go to that URL in a browser and you should see the mozilla.org home page.
