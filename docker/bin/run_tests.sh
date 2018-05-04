@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Runs unit_tests
 #
-set -ex
+set -exo pipefail
 
 source docker/bin/set_git_env_vars.sh
 

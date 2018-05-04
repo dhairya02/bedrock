@@ -1,8 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-set -ex
+set -exo pipefail
 
 source docker/bin/set_git_env_vars.sh
+
+# get legal-docs
+git submodule sync
+git submodule update --init --recursive
 
 # pull latest images
 docker-compose pull app web release

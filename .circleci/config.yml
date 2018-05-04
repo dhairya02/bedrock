@@ -2,15 +2,16 @@ version: 2
 jobs:
   test_py:
     docker:
-      - image: "docker:17-git"
+      - image: "docker:17"
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Python Tests
           command: |
+            apk add --no-cache git bash
             docker/bin/build_images.sh
-            docker-compose run test-image
+            docker/bin/run_tests.sh
 
   test_js:
     docker:
