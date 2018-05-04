@@ -89,7 +89,7 @@ gulp.task('sass', ['assets'], () => {
         // we don't serve the source files
         // so include scss content inside the sourcemaps
         .pipe(gulpif(!production, sourcemaps.write({
-            'includeContent': false
+            'includeContent': true
         })))
         .pipe(gulp.dest('static_build'));
 });
@@ -139,7 +139,7 @@ gulp.task('js:compile', ['assets'], () => {
             .pipe(gulpif(!production, sourcemaps.init()))
             .pipe(concat(bundleFilename))
             .pipe(gulpif(!production, sourcemaps.write({
-                'includeContent': false
+                'includeContent': true
             })))
             .pipe(gulp.dest('static_build'));
     }));
