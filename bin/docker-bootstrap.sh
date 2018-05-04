@@ -22,6 +22,5 @@ docker pull mozorg/bedrock_assets:latest
 docker pull mozorg/bedrock_test:latest
 
 # build fresh based on local changes
-docker-compose build web
-docker-compose build base
 docker-compose build app
+docker-compose build web

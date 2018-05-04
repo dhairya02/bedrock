@@ -1,6 +1,18 @@
-FROM python:2-stretch
+FROM node:6-slim AS assets
 
-# from https://github.com/mozmeao/docker-pythode/blob/master/Dockerfile.footer
+ENV PATH=/app/node_modules/.bin:$PATH
+WORKDIR /app
+
+COPY package.json yarn.lock ./
+RUN yarn install --pure-lockfile && rm -rf /usr/local/share/.cache/yarn
+RUN npm install gulp-cli -g
+COPY gulpfile.js static-bundles.json ./
+COPY ./media ./media
+RUN gulp build --production
+
+#
+# django app container
+FROM python:2-stretch AS webapp
 
 # Extra python env
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -12,8 +24,6 @@ RUN adduser --uid 1000 --disabled-password --gecos '' --no-create-home webdev
 
 # Add apt script
 COPY docker/bin/apt-install /usr/local/bin/
-
-# end from Dockerfile.footer
 
 WORKDIR /app
 EXPOSE 8000
@@ -41,6 +51,8 @@ COPY ./docker ./docker
 COPY ./vendor-local ./vendor-local
 COPY ./bedrock ./bedrock
 COPY ./media ./media
+COPY --from=assets /app/static_build /app/static_build
+RUN honcho run --env docker/envfiles/prod.env docker/bin/build_staticfiles.sh
 
 # build args
 ARG GIT_SHA=latest
@@ -49,11 +61,27 @@ ENV GIT_SHA=${GIT_SHA}
 ENV BRANCH_NAME=${BRANCH_NAME}
 
 # rely on build args
-COPY --from="mozorg/bedrock:${GIT_SHA}" /app/static_build /app/static_build
-RUN honcho run --env docker/envfiles/prod.env docker/bin/build_staticfiles.sh
+RUN bin/run-sync-all.sh
+
+#
+# expanded webapp image for testing and dev
+FROM webapp AS tester
+
+CMD ["./bin/run-tests.sh"]
+USER root
+
+RUN pip install --no-cache-dir -r requirements/test.txt
+COPY ./setup.cfg ./
+COPY ./tests ./tests
+
+RUN chown webdev.webdev -R .
+USER webdev
+
+#
+# final webapp image for prod
+FROM webapp AS release
 
 RUN echo "${GIT_SHA}" > ./static/revision.txt
-RUN bin/run-sync-all.sh
 
 # Change User
 RUN chown webdev.webdev -R .

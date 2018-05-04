@@ -8,10 +8,8 @@ services:
   web:
     build:
       context: .
-      dockerfile: docker/dockerfiles/bedrock_assets
-      cache_from:
-        - mozorg/bedrock_assets:latest
-    image: mozorg/bedrock_assets:${GIT_COMMIT:-latest}
+      target: assets
+    image: mozorg/bedrock_assets:latest
     command: npm run docker-start
     depends_on:
       - app
@@ -29,10 +27,11 @@ services:
   app:
     build:
       context: .
-      dockerfile: docker/dockerfiles/bedrock_test
-      cache_from:
-        - mozorg/bedrock:latest
-    image: mozorg/bedrock_test:${GIT_COMMIT:-latest}
+      target: tester
+      args:
+        GIT_SHA: ${GIT_SHA:-latest}
+        BRANCH_NAME: ${BRANCH_NAME:-latest}
+    image: mozorg/bedrock_test:latest
     command: python manage.py runserver 0.0.0.0:8000
     env_file: .env
     ports:
@@ -49,21 +48,9 @@ services:
       - ./vendor-local/:/app/vendor-local:cached
       - ./wsgi/:/app/wsgi:cached
 
-  # base image. mostly for building.
-  base:
-    image: mozorg/bedrock:${GIT_COMMIT:-latest}
-    build:
-      context: .
-      dockerfile: docker/dockerfiles/bedrock_app
-      cache_from:
-        - mozorg/bedrock:latest
-      args:
-        GIT_SHA: "${GIT_COMMIT:-latest}"
-        BRANCH_NAME: "${BRANCH_NAME:-master}"
-
   # run the tests against local changes
   test:
-    image: mozorg/bedrock_test:${GIT_COMMIT:-latest}
+    image: mozorg/bedrock_test:latest
     env_file: docker/envfiles/test.env
     volumes:
       - ./bedrock/:/app/bedrock:cached
@@ -82,3 +69,8 @@ services:
   test-image:
     image: mozorg/bedrock_test:${GIT_COMMIT:-latest}
     env_file: docker/envfiles/test.env
+
+  # the django app
+  release:
+    image: mozorg/bedrock:latest
+    build: .

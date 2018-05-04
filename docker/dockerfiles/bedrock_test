@@ -1,4 +1,5 @@
-FROM mozorg/bedrock:latest
+ARG GIT_SHA=latest
+FROM mozorg/bedrock:${GIT_SHA}
 
 CMD ["./bin/run-tests.sh"]
 USER root
