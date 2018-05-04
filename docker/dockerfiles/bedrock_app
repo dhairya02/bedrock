@@ -41,15 +41,17 @@ COPY ./docker ./docker
 COPY ./vendor-local ./vendor-local
 COPY ./bedrock ./bedrock
 COPY ./media ./media
-COPY ./static_build ./static_build
-
-RUN honcho run --env docker/envfiles/prod.env docker/bin/build_staticfiles.sh
 
 # build args
-ARG GIT_SHA=none
+ARG GIT_SHA=latest
 ARG BRANCH_NAME=master
-ENV GIT_SHA ${GIT_SHA}
+ENV GIT_SHA=${GIT_SHA}
 ENV BRANCH_NAME=${BRANCH_NAME}
+
+# rely on build args
+COPY --from=mozorg/bedrock:${GIT_SHA} /app/static_build /app/static_build
+RUN honcho run --env docker/envfiles/prod.env docker/bin/build_staticfiles.sh
+
 RUN echo "${GIT_SHA}" > ./static/revision.txt
 RUN bin/run-sync-all.sh
 

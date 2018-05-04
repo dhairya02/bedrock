@@ -2,6 +2,8 @@
 
 set -exo pipefail
 
+source docker/bin/set_git_env_vars.sh
+
 # get legal-docs
 git submodule sync
 git submodule update --init --recursive
@@ -20,6 +22,6 @@ docker pull mozorg/bedrock_assets:latest
 docker pull mozorg/bedrock_test:latest
 
 # build fresh based on local changes
+docker-compose build web
 docker-compose build base
 docker-compose build app
-docker-compose build web
