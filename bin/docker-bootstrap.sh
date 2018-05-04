@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 set -exo pipefail
 
@@ -14,13 +14,8 @@ find . -name '*.egg' -exec rm -f {} +
 find . -name '*.pyc' -exec rm -f {} +
 find . -name '*.pyo' -exec rm -f {} +
 find . -name '__pycache__' -exec rm -rf {} +
-rm -rf static_build
 
-# pull prod docker images
-docker pull mozorg/bedrock:latest
-docker pull mozorg/bedrock_assets:latest
-docker pull mozorg/bedrock_test:latest
-
+# pull latest images
+docker-compose pull app web
 # build fresh based on local changes
-docker-compose build app
-docker-compose build web
+docker-compose build app web

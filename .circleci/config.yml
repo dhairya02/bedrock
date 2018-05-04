@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Python Tests
           command: |
-            bin/docker-bootstrap.sh
+            docker/bin/build_images.sh
             docker-compose run test-image
 
   test_js:
