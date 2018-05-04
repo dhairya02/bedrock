@@ -2,14 +2,13 @@ version: 2
 jobs:
   test_py:
     docker:
-      - image: "docker:17"
+      - image: circleci/python:2.7-stretch
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Python Tests
           command: |
-            apk add --no-cache git bash
             docker/bin/build_images.sh
             docker/bin/run_tests.sh
 
