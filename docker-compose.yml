@@ -5,7 +5,7 @@ services:
   # This is the primary server and it proxies
   # the Django app so that it can add the fancy
   # browser refresh JS.
-  web:
+  assets:
     build:
       context: .
       target: assets
@@ -27,7 +27,7 @@ services:
   app:
     build:
       context: .
-      target: tester
+      target: devapp
       args:
         GIT_SHA: ${GIT_SHA:-latest}
         BRANCH_NAME: ${BRANCH_NAME:-latest}
@@ -72,5 +72,10 @@ services:
 
   # the django app
   release:
+    build:
+      context: .
+      target: webapp
+      args:
+        GIT_SHA: ${GIT_SHA:-latest}
+        BRANCH_NAME: ${BRANCH_NAME:-latest}
     image: mozorg/bedrock:latest
-    build: .

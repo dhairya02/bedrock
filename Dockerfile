@@ -1,3 +1,6 @@
+########
+# assets builder and dev server
+#
 FROM node:6-slim AS assets
 
 ENV PATH=/app/node_modules/.bin:$PATH
@@ -10,8 +13,9 @@ COPY gulpfile.js static-bundles.json ./
 COPY ./media ./media
 RUN gulp build --production
 
-#
+########
 # django app container
+#
 FROM python:2-stretch AS webapp
 
 # Extra python env
@@ -31,7 +35,10 @@ CMD ["./bin/run.sh"]
 
 RUN apt-install gettext build-essential libxml2-dev libxslt1-dev libxslt1.1 git
 
-COPY ./requirements /app/requirements
+COPY requirements/base.txt \
+     requirements/compiled.txt \
+     requirements/docker.txt \
+     requirements/prod.txt ./requirements/
 
 # Install Python deps
 RUN pip install --no-cache-dir -r requirements/prod.txt
@@ -63,26 +70,25 @@ ENV BRANCH_NAME=${BRANCH_NAME}
 # rely on build args
 RUN bin/run-sync-all.sh
 
-#
+RUN echo "${GIT_SHA}" > ./static/revision.txt
+
+# Change User
+RUN chown webdev.webdev -R .
+USER webdev
+
+########
 # expanded webapp image for testing and dev
-FROM webapp AS tester
+#
+FROM webapp AS devapp
 
 CMD ["./bin/run-tests.sh"]
 USER root
 
+COPY requirements/dev.txt \
+     requirements/test.txt ./requirements/
 RUN pip install --no-cache-dir -r requirements/test.txt
 COPY ./setup.cfg ./
 COPY ./tests ./tests
 
-RUN chown webdev.webdev -R .
-USER webdev
-
-#
-# final webapp image for prod
-FROM webapp AS release
-
-RUN echo "${GIT_SHA}" > ./static/revision.txt
-
-# Change User
 RUN chown webdev.webdev -R .
 USER webdev

@@ -16,6 +16,6 @@ find . -name '*.pyo' -exec rm -f {} +
 find . -name '__pycache__' -exec rm -rf {} +
 
 # pull latest images
-docker-compose pull app web
+docker-compose pull app assets
 # build fresh based on local changes
-docker-compose build app web
+docker-compose build app assets
