@@ -33,9 +33,9 @@ Linux subsystem) you can run a script that will pull our production docker image
 
     $ bin/docker-bootstrap.sh
 
-Then you can start the server with ``docker-compose``::
+Then you can start the server with::
 
-    $ docker-compose up web
+    $ bin/docker-start.sh
 
 You should see a number of things happeneing, but when it's done it will output something saying that the server is running
 at `localhost:3000 <http://localhost:3000/>`_. Go to that URL in a browser and you should see the mozilla.org home page.
@@ -131,7 +131,7 @@ Docker
 
 You can simply run the ``bin/docker-start.sh`` script mentioned above, or use docker-compose directly::
 
-    $ docker-compose up web
+    $ docker-compose up app assets
 
 Local
 -----
