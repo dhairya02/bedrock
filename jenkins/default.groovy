@@ -46,12 +46,12 @@ if ( config.push_public_registry != false ) {
     stage ('Push Public Images') {
         try {
             if (config.demo) {
-                utils.pushDockerhub('mozorg/bedrock_app')
+                utils.pushDockerhub('mozorg/bedrock')
             }
             else {
                 utils.pushDockerhub('mozorg/bedrock_test')
                 utils.pushDockerhub('mozorg/bedrock_assets')
-                utils.pushDockerhub('mozorg/bedrock_app')
+                utils.pushDockerhub('mozorg/bedrock')
             }
         } catch(err) {
             utils.ircNotification([stage: 'Dockerhub Push Failed', status: 'failure'])
