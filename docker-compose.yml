@@ -11,8 +11,6 @@ services:
       target: assets
     image: mozorg/bedrock_assets:latest
     command: npm run docker-start
-    depends_on:
-      - app
     ports:
       - "3000:3000"
       - "3001:3001"

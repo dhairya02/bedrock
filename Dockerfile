@@ -9,6 +9,7 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --pure-lockfile && rm -rf /usr/local/share/.cache/yarn
 RUN npm install gulp-cli -g
+COPY .eslintrc.js .stylelintrc ./
 COPY gulpfile.js static-bundles.json ./
 COPY ./media ./media
 RUN gulp build --production

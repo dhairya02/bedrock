@@ -31,11 +31,11 @@ Docker Installation
 This is the simplest way to get started developing for bedrock. If you're on Linux or Mac (and possibly Windows 10 with the
 Linux subsystem) you can run a script that will pull our production docker images and use those to build developer ones::
 
-    $ bin/docker-bootstrap.sh
+    $ make build
 
 Then you can start the server with::
 
-    $ bin/docker-start.sh
+    $ make run
 
 You should see a number of things happeneing, but when it's done it will output something saying that the server is running
 at `localhost:3000 <http://localhost:3000/>`_. Go to that URL in a browser and you should see the mozilla.org home page.
@@ -100,7 +100,7 @@ Docker
 
 We manage our local docker environment with docker-compose. All you need to do here is run::
 
-    $ docker-compose run test
+    $ make test
 
 Local
 -----
@@ -112,7 +112,7 @@ activated, so running the tests is as simple as::
 
 To test a single app, specify the app by name in the command above. e.g.::
 
-    $ py.test lib bedrock/firefox
+    $ py.test bedrock/firefox
 
 .. note::
 
@@ -129,9 +129,16 @@ Make it run
 Docker
 ------
 
-You can simply run the ``bin/docker-start.sh`` script mentioned above, or use docker-compose directly::
+You can simply run the ``make run`` script mentioned above, or use docker-compose directly::
 
-    $ docker-compose up app assets
+    $ bin/docker-compose.sh up app assets
+
+
+.. note::
+
+    We say to use our wrapper script (``bin/docker-compose.sh``) for docker-compose because it sets some extra
+    environment variables (mostly for git hashes, branches, etc.) that the docker-compose.yml can use, but you
+    can also just use ``docker-compose`` directly if you'd like. The wrapper is mostly for deployment.
 
 Local
 -----
@@ -157,9 +164,9 @@ To view them or update to a more recent version update the submodule::
 Localization
 ============
 
-Localization (or L10n) files were fetched by the `bootstrap.sh` command your ran earlier.
-If you need to update them or switch to a different repo or branch after changing settings
-you can run the following command::
+Localization (or L10n) files were fetched by the `bootstrap.sh` command your ran earlier and are
+included in the docker images. If you need to update them or switch to a different repo or branch
+after changing settings you can run the following command::
 
     $ ./manage.py l10n_update
 

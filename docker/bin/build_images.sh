@@ -8,8 +8,6 @@ source docker/bin/set_git_env_vars.sh
 git submodule sync
 git submodule update --init --recursive
 
-touch .env
-
 # pull latest images
 docker-compose pull app assets release
 # build fresh based on local changes
