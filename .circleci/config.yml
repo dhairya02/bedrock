@@ -9,8 +9,8 @@ jobs:
       - run:
           name: Python Tests
           command: |
-            docker/bin/build_images.sh
-            docker/bin/run_tests.sh
+            make clean build
+            make test-image
 
   test_js:
     docker:
