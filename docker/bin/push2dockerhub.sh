@@ -10,8 +10,6 @@ set -exo pipefail
 BIN_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $BIN_DIR/set_git_env_vars.sh
 
-docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-
 if [[ "$FROM_DOCKER_REPOSITORY" == "mozorg/bedrock" ]]; then
     DOCKER_TAG="${BRANCH_NAME_SAFE}-${GIT_COMMIT}"
 else
