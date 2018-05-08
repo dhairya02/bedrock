@@ -36,7 +36,7 @@ run: .docker-build
 	${DOCKERCOMPOSE} up assets app
 
 shell: .docker-build
-	${DOCKERCOMPOSE} run app python manage.py shell
+	${DOCKERCOMPOSE} run app python manage.py shell_plus
 
 clean:
 	# python related things
