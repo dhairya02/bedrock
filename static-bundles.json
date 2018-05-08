@@ -205,6 +205,12 @@
     },
     {
       "files": [
+        "css/grants/grants.less"
+      ],
+      "name": "grants"
+    },
+    {
+      "files": [
         "css/foundation/annual2013.less",
         "css/foundation/annual2014.less"
       ],
@@ -224,9 +230,9 @@
     },
     {
       "files": [
-        "css/newsletter/newsletter-mozilla.scss"
+        "css/firefox/testflight.less"
       ],
-      "name": "newsletter-mozilla"
+      "name": "firefox_ios_testflight"
     },
     {
       "files": [
@@ -240,12 +246,6 @@
         "css/mozorg/contribute/contribute-base.less"
       ],
       "name": "contribute-base"
-    },
-    {
-      "files": [
-        "css/mozorg/powered-by.less"
-      ],
-      "name": "powered-by"
     },
     {
       "files": [
@@ -470,9 +470,9 @@
     },
     {
       "files": [
-        "css/firefox/testflight.less"
+        "css/newsletter/newsletter-mozilla.scss"
       ],
-      "name": "firefox_ios_testflight"
+      "name": "newsletter-mozilla"
     },
     {
       "files": [
@@ -512,9 +512,9 @@
     },
     {
       "files": [
-        "css/grants/grants.less"
+        "css/firefox/whatsnew/whatsnew-60.scss"
       ],
-      "name": "grants"
+      "name": "firefox_whatsnew_60"
     },
     {
       "files": [
@@ -613,9 +613,9 @@
     },
     {
       "files": [
-        "css/firefox/all-oldIE.less"
+        "css/mozorg/powered-by.less"
       ],
-      "name": "firefox_all_old_ie"
+      "name": "powered-by"
     },
     {
       "files": [
@@ -868,11 +868,11 @@
     },
     {
       "files": [
-        "js/base/mozilla-modal.js",
-        "js/base/mozilla-share-cta.js",
-        "js/mozorg/manifesto.js"
+        "js/base/mozilla-fxa-iframe.js",
+        "js/base/send-to-device.js",
+        "js/firefox/whatsnew/whatsnew-60.js"
       ],
-      "name": "manifesto"
+      "name": "firefox_whatsnew_60"
     },
     {
       "files": [
@@ -1315,6 +1315,14 @@
         "js/privacy/privacy.js"
       ],
       "name": "privacy"
+    },
+    {
+      "files": [
+        "js/base/mozilla-modal.js",
+        "js/base/mozilla-share-cta.js",
+        "js/mozorg/manifesto.js"
+      ],
+      "name": "manifesto"
     },
     {
       "files": [
